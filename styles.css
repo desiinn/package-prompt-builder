@@ -1,0 +1,150 @@
+/* カスタムフォント設定 */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* 選択された項目のスタイル */
+.select-item.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+/* コピーボタンのスタイル */
+.copy-button.copied {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+}
+
+/* 生成ボタンのローディング状態 */
+.generate-button.loading {
+    background: #95a5a6;
+    cursor: not-allowed;
+    animation: pulse 1.5s infinite;
+}
+
+/* パルスアニメーション */
+@keyframes pulse {
+    0% { 
+        transform: scale(1); 
+    }
+    50% { 
+        transform: scale(1.02); 
+    }
+    100% { 
+        transform: scale(1); 
+    }
+}
+
+/* フェードインアニメーション */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* プロンプト出力エリアの改善 */
+.prompt-output {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* 選択項目のホバー効果を強化 */
+.select-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* サブオプションエリアのスタイル調整 */
+.sub-options {
+    border-left: 4px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.sub-options:not(.hidden) {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        max-height: 500px;
+        transform: translateY(0);
+    }
+}
+
+/* サブサブオプションエリアのスタイル */
+.sub-sub-options {
+    border-left: 4px solid #cbd5e0;
+    transition: all 0.3s ease;
+}
+
+/* ボタンのトランジション効果 */
+.generate-button,
+.copy-button {
+    transition: all 0.2s ease;
+}
+
+.generate-button:active,
+.copy-button:active {
+    transform: translateY(1px);
+}
+
+/* 統計表示エリアのスタイル */
+.stats {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+    .container {
+        margin: 0.5rem;
+        border-radius: 1.5rem;
+    }
+    
+    .select-item {
+        padding: 0.75rem;
+    }
+    
+    .select-item span:first-child {
+        font-size: 1.5rem;
+    }
+}
+
+/* フォーカス状態の改善 */
+input:focus,
+textarea:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+}
+
+/* 隠し状態のトランジション */
+.hidden {
+    display: none !important;
+}
+
+/* エラー状態のスタイル（将来の拡張用） */
+.error {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+/* 成功状態のスタイル（将来の拡張用） */
+.success {
+    border-color: #10b981;
+    background-color: #f0fdf4;
+}

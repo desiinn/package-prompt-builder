@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品パッケージモックアップ プロンプト生成ツール</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- カスタムCSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8 flex items-center justify-center">
+    <div class="container max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+        <!-- ヘッダー -->
+        <div class="p-6 md:p-10 bg-gradient-to-r from-blue-700 to-purple-800 text-white text-center">
+            <h1 class="text-3xl md:text-4xl font-light mb-2">🎨 商品パッケージモックアップ プロンプト生成ツール</h1>
+            <p class="text-sm md:text-base opacity-90">AIで高品質な白背景モックアップ画像を生成するためのプロンプトを簡単作成</p>
+        </div>
+
+        <!-- 設定フォーム -->
+        <div class="p-6 md:p-10 overflow-y-auto">
+            <!-- パッケージ形状 -->
+            <div class="mb-8">
+                <h3 class="flex items-center text-xl font-bold text-gray-800 mb-5">
+                    <span class="mr-3 text-2xl">📦</span>パッケージ形状
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="shapeGrid">
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="shape" data-value="box" data-sub="boxSubOptions">
+                        <span class="text-3xl block mb-2">📦</span>
+                        <span class="text-sm font-medium">紙箱</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="shape" data-value="bottle jar" data-sub="bottleSubOptions" data-material="glass">
+                        <span class="text-3xl block mb-2">🍾</span>
+                        <span class="text-sm font-medium">ボトル・瓶</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="shape" data-value="pouch" data-material="glossy plastic">
+                        <span class="text-3xl block mb-2">🛍️</span>
+                        <span class="text-sm font-medium">パウチ</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="shape" data-value="plastic bag" data-material="transparent plastic">
+                        <span class="text-3xl block mb-2">🛒</span>
+                        <span class="text-sm font-medium">プラスチック袋</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="shape" data-value="can" data-material="aluminum">
+                        <span class="text-3xl block mb-2">🥫</span>
+                        <span class="text-sm font-medium">缶</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="shape" data-value="tube" data-material="plastic">
+                        <span class="text-3xl block mb-2">🧴</span>
+                        <span class="text-sm font-medium">チューブ</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="shape" data-value="stick pack" data-material="laminated film">
+                        <span class="text-3xl block mb-2">📏</span>
+                        <span class="text-sm font-medium">スティック包装</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="shape" data-value="retort pouch" data-material="aluminum foil">
+                        <span class="text-3xl block mb-2">🥘</span>
+                        <span class="text-sm font-medium">レトルトパウチ</span>
+                    </div>
+                </div>
+
+                <!-- サブオプション -->
+                <div class="sub-options mt-6 p-4 bg-gray-50 rounded-xl hidden" id="boxSubOptions">
+                    <h4 class="text-base font-bold text-gray-700 mb-3">紙箱の詳細形状</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <div class="select-item sub-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-shape-box" data-value="rectangular">
+                            <span class="text-2xl block mb-1">📱</span>
+                            <span class="text-xs font-medium">長方形</span>
+                        </div>
+                        <div class="select-item sub-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-shape-box" data-value="cylindrical">
+                            <span class="text-2xl block mb-1">🛢️</span>
+                            <span class="text-xs font-medium">円筒形</span>
+                        </div>
+                    </div>
+                    
+                    <div id="lidOptionsWrapper">
+                        <h4 class="text-base font-bold text-gray-700 mt-6 mb-3">蓋の状態</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="lidStateOptions">
+                            <div class="select-item sub-lid-state p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="lid-state-box" data-value="opened">
+                                <span class="text-2xl block mb-1">📦</span>
+                                <span class="text-xs font-medium">開いている</span>
+                            </div>
+                            <div class="select-item sub-lid-state p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="lid-state-box" data-value="closed">
+                                <span class="text-2xl block mb-1">🎁</span>
+                                <span class="text-xs font-medium">閉じている</span>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-base font-bold text-gray-700 mt-6 mb-3" id="lidTypeHeading">蓋の形状</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="lidTypeOptions">
+                            <div class="select-item sub-lid-type p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="lid-type-box" data-value="with a lid and base">
+                                <span class="text-2xl block mb-1">🎁</span>
+                                <span class="text-xs font-medium">かぶせ蓋</span>
+                            </div>
+                            <div class="select-item sub-lid-type p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="lid-type-box" data-value="tuck-in flap lid">
+                                <span class="text-2xl block mb-1">🎁</span>
+                                <span class="text-xs font-medium">差し込み式の蓋</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sub-options mt-6 p-4 bg-gray-50 rounded-xl hidden" id="bottleSubOptions">
+                    <h4 class="text-base font-bold text-gray-700 mb-3">ボトル・瓶の種類</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <div class="select-item sub-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-shape-bottle" data-value="wine bottle" data-sub-sub="wineBottleOptions">
+                            <span class="text-2xl block mb-1">🍷</span>
+                            <span class="text-xs font-medium">ワインボトル</span>
+                        </div>
+                        <div class="select-item sub-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-shape-bottle" data-value="beer bottle">
+                            <span class="text-2xl block mb-1">🍺</span>
+                            <span class="text-xs font-medium">ビールボトル</span>
+                        </div>
+                        <div class="select-item sub-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-shape-bottle" data-value="sake bottle">
+                            <span class="text-2xl block mb-1">🍶</span>
+                            <span class="text-xs font-medium">日本酒ボトル</span>
+                        </div>
+                        <div class="select-item sub-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-shape-bottle" data-value="cylindrical jam jar">
+                            <span class="text-2xl block mb-1">🍯</span>
+                            <span class="text-xs font-medium">円筒ジャム瓶</span>
+                        </div>
+                        <div class="select-item sub-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-shape-bottle" data-value="square jam jar">
+                            <span class="text-2xl block mb-1">🫙</span>
+                            <span class="text-xs font-medium">四角ジャム瓶</span>
+                        </div>
+                        <div class="select-item sub-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-shape-bottle" data-value="sauce bottle">
+                            <span class="text-2xl block mb-1">🍅</span>
+                            <span class="text-xs font-medium">調味料ボトル</span>
+                        </div>
+                    </div>
+
+                    <!-- ワインボトルの詳細形状 -->
+                    <div class="sub-sub-options mt-6 p-4 bg-gray-100 rounded-xl hidden" id="wineBottleOptions">
+                        <h4 class="text-base font-bold text-gray-700 mb-3">ワインボトルの形状</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <div class="select-item sub-wine-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-wine-shape" data-value="bordeaux">
+                                <span class="text-2xl block mb-1">🍷</span>
+                                <span class="text-xs font-medium">ボルドー型</span>
+                            </div>
+                            <div class="select-item sub-wine-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-wine-shape" data-value="burgundy">
+                                <span class="text-2xl block mb-1">🍷</span>
+                                <span class="text-xs font-medium">ブルゴーニュ型</span>
+                            </div>
+                            <div class="select-item sub-wine-shape p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="sub-wine-shape" data-value="other">
+                                <span class="text-2xl block mb-1">❓</span>
+                                <span class="text-xs font-medium">その他</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 瓶の色 -->
+            <div class="mb-8" id="bottleColorOptions" style="display: none;">
+                <h3 class="flex items-center text-xl font-bold text-gray-800 mb-5">
+                    <span class="mr-3 text-2xl">🎨</span>瓶の色
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="bottle-color" data-value="dark green bottle">
+                        <span class="text-3xl block mb-2">🍷</span>
+                        <span class="text-sm font-medium">赤ワイン</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="bottle-color" data-value="clear bottle">
+                        <span class="text-3xl block mb-2">🥂</span>
+                        <span class="text-sm font-medium">白ワイン</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="bottle-color" data-value="light pink bottle">
+                        <span class="text-3xl block mb-2">🍾</span>
+                        <span class="text-sm font-medium">ロゼワイン</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 寸法設定 -->
+            <div class="mb-8 hidden" id="descriptiveInputs">
+                <h3 class="flex items-center text-xl font-bold text-gray-800 mb-5">
+                    <span class="mr-3 text-2xl">📏</span>寸法設定
+                </h3>
+                <div id="descriptiveInputsContent" class="">
+                    <div class="mb-4">
+                        <h4 class="text-base font-bold text-gray-700 mb-3">幅の比率</h4>
+                        <div class="flex space-x-4">
+                            <button class="select-item p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 font-medium text-sm" data-group="descWidth" data-value="wide shape">幅広</button>
+                            <button class="select-item p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 font-medium text-sm" data-group="descWidth" data-value="narrow shape">幅狭</button>
+                        </div>
+                    </div>
+                    <div class="mb-4" id="descDepthWrapper">
+                        <h4 class="text-base font-bold text-gray-700 mb-3">奥行きの比率</h4>
+                        <div class="flex space-x-4">
+                            <button class="select-item p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 font-medium text-sm" data-group="descDepth" data-value="long depth">奥行きが長い</button>
+                            <button class="select-item p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 font-medium text-sm" data-group="descDepth" data-value="short depth">奥行きが短い</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-base font-bold text-gray-700 mb-3">高さの比率</h4>
+                        <div class="flex space-x-4">
+                            <button class="select-item p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 font-medium text-sm" data-group="descHeight" data-value="high height">背が高い</button>
+                            <button class="select-item p-3 text-center cursor-pointer transition-all rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 font-medium text-sm" data-group="descHeight" data-value="low height">背が低い</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- アングル・視点 -->
+            <div class="mb-8">
+                <h3 class="flex items-center text-xl font-bold text-gray-800 mb-5">
+                    <span class="mr-3 text-2xl">📐</span>アングル・視点
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="angleGrid">
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="angle" data-value="front view">
+                        <span class="text-3xl block mb-2">⬜</span>
+                        <span class="text-sm font-medium">正面</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="angle" data-value="three-quarter view">
+                        <span class="text-3xl block mb-2">📐</span>
+                        <span class="text-sm font-medium">斜め上俯瞰</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="angle" data-value="side view">
+                        <span class="text-3xl block mb-2">📏</span>
+                        <span class="text-sm font-medium">真横</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="angle" data-value="multiple angles">
+                        <span class="text-3xl block mb-2">🔄</span>
+                        <span class="text-sm font-medium">3方向</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 照明・雰囲気 -->
+            <div class="mb-8">
+                <h3 class="flex items-center text-xl font-bold text-gray-800 mb-5">
+                    <span class="mr-3 text-2xl">💡</span>照明・雰囲気
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="lightingGrid">
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="lighting" data-value="bright natural light">
+                        <span class="text-3xl block mb-2">☀️</span>
+                        <span class="text-sm font-medium">明るい自然光</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="lighting" data-value="studio lighting">
+                        <span class="text-3xl block mb-2">💡</span>
+                        <span class="text-sm font-medium">スタジオ照明</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="lighting" data-value="soft lighting">
+                        <span class="text-3xl block mb-2">🌙</span>
+                        <span class="text-sm font-medium">ソフトライト</span>
+                    </div>
+                    <div class="select-item p-4 text-center cursor-pointer transition-all rounded-xl border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50" data-group="lighting" data-value="dramatic lighting">
+                        <span class="text-3xl block mb-2">🎭</span>
+                        <span class="text-sm font-medium">ドラマチック</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 補足キーワード -->
+            <div class="mb-8">
+                <h3 class="flex items-center text-xl font-bold text-gray-800 mb-5">
+                    <span class="mr-3 text-2xl">🏷️</span>補足キーワード
+                </h3>
+                <input type="text" class="w-full p-4 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-blue-500 transition-colors" id="additionalKeywords" placeholder="例: minimal design, clean look, premium quality">
+                <textarea class="w-full p-4 mt-4 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-blue-500 transition-colors hidden" id="additionalKeywordsMultiLine" rows="4" placeholder="その他の形状や詳細な説明を自由にご記入ください。"></textarea>
+            </div>
+        </div>
+
+        <!-- 出力セクション -->
+        <div class="bg-gray-50 p-6 md:p-10 border-t border-gray-200 flex flex-col">
+            <div class="flex-grow">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">🎯 生成されたプロンプト</h3>
+                <p class="text-sm text-gray-600 mb-6">AI画像生成ツールに貼り付けて使用してください。</p>
+
+                <div class="prompt-output p-6 bg-white rounded-2xl border-2 border-gray-200 min-h-[250px] font-mono text-gray-800 text-sm leading-relaxed mb-6 whitespace-pre-wrap" id="promptOutput">
+                    パッケージの設定を選択して、「AIプロンプトを生成」ボタンを押してください...
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <button class="generate-button w-full px-8 py-4 rounded-xl text-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-md hover:shadow-lg" id="generateButton">
+                    🤖 AIプロンプトを生成
+                </button>
+                <button class="copy-button w-full px-8 py-4 rounded-xl text-lg font-bold text-white bg-gray-500 hover:bg-gray-600 transition-all shadow-md hover:shadow-lg" id="copyButton">
+                    📋 プロンプトをコピー
+                </button>
+            </div>
+            
+            <div class="stats mt-6 p-4 bg-white rounded-xl border border-gray-200">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                    <span>文字数:</span>
+                    <span id="charCount">0</span>
+                </div>
+                <div class="flex justify-between text-sm text-gray-600">
+                    <span>キーワード数:</span>
+                    <span id="keywordCount">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
