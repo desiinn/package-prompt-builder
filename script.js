@@ -3,7 +3,7 @@ const packageTypes = {
     box: {
         name: "箱",
         imageUrl: "/images/icon-sample.jpg",
-        details: { // detailsをグループごとのオブジェクトに変更
+        details: {
             形状: {
                 cube: "立方体",
                 thin: "薄型",
@@ -336,10 +336,25 @@ function showPrompt() {
     // 選択内容の表示
     let summaryHTML = `<div><strong>パッケージタイプ:</strong> ${packageTypes[selectedPackageType].name}</div>`;
     
+    // 修正箇所
     if (selectedPackageDetails.length > 0) {
+        // すべての詳細設定グループから名前を取得するように変更
+        const allDetails = Object.values(packageTypes[selectedPackageType].details).reduce((acc, current) => {
+            return acc.concat(Object.keys(current));
+        }, []);
+
         const detailNames = selectedPackageDetails
-            .filter(detail => packageTypes[selectedPackageType].details[detail])
-            .map(detail => packageTypes[selectedPackageType].details[detail]);
+            .filter(detailKey => allDetails.includes(detailKey))
+            .map(detailKey => {
+                // グループをループして正しい名前を見つける
+                let name = '';
+                Object.values(packageTypes[selectedPackageType].details).forEach(group => {
+                    if (group[detailKey]) {
+                        name = group[detailKey];
+                    }
+                });
+                return name;
+            });
         
         if (detailNames.length > 0) {
             summaryHTML += `<div><strong>詳細設定:</strong> ${detailNames.join(", ")}</div>`;
