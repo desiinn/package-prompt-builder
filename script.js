@@ -2,6 +2,7 @@
 const packageTypes = {
     box: {
         name: "箱",
+        imageUrl: "/images/icon-sample.jpg",
         details: {
             cube: "立方体",
             thin: "薄型",
@@ -12,6 +13,7 @@ const packageTypes = {
     },
     bottle: {
         name: "瓶",
+        imageUrl: "/images/icon-sample.jpg",
         details: {
             round: "丸型",
             square: "角型",
@@ -22,6 +24,7 @@ const packageTypes = {
     },
     pouch: {
         name: "プラ袋",
+        imageUrl: "/images/icon-sample.jpg",
         details: {
             stand: "スタンドパウチ",
             flat: "平袋",
@@ -32,6 +35,7 @@ const packageTypes = {
     },
     tube: {
         name: "チューブ",
+        imageUrl: "/images/icon-sample.jpg",
         details: {
             squeeze: "スクイーズ",
             flip: "フリップキャップ",
@@ -42,6 +46,7 @@ const packageTypes = {
     },
     can: {
         name: "缶",
+        imageUrl: "/images/icon-sample.jpg",
         details: {
             beverage: "飲料缶",
             food: "食品缶",
@@ -52,6 +57,7 @@ const packageTypes = {
     },
     jar: {
         name: "ジャー",
+        imageUrl: "/images/icon-sample.jpg",
         details: {
             glass: "ガラス",
             plastic: "プラスチック",
@@ -65,14 +71,17 @@ const packageTypes = {
 const angles = {
     front: {
         name: "正面",
+        imageUrl: "/images/icon-sample.jpg",
         prompt: "front view, centered composition"
     },
     diagonal: {
         name: "斜めから",
+        imageUrl: "/images/icon-sample.jpg",
         prompt: "3/4 angle view, slight perspective"
     },
     three_views: {
         name: "三面図",
+        imageUrl: "/images/icon-sample.jpg",
         prompt: "three view technical drawing, front side and top view"
     }
 };
@@ -145,16 +154,16 @@ function renderPackageTypes() {
         const button = document.createElement("button");
         const isSelected = selectedPackageType === key;
         
-        button.className = `package-btn p-4 rounded-lg border-2 transition-all duration-200 ${
+        button.className = `package-btn rounded-lg border-2 transition-all duration-200 ${
             isSelected ? "border-blue-500 bg-blue-50 text-blue-700" : "border-gray-200 hover:border-blue-300 hover:bg-blue-50"
         }`;
         
         button.innerHTML = `
-            <div class="flex flex-col items-center space-y-2">
-                <div class="w-12 h-12 bg-gray-100 border border-gray-300 rounded-lg flex items-center justify-center">
-                    <i data-lucide="package" class="w-6 h-6 text-gray-500"></i>
+            <div class="flex flex-row items-center space-x-4 p-1">
+                <div class="w-24 h-24 flex-none border border-gray-300 rounded-lg flex items-center justify-center">
+                    <img src="${type.imageUrl}" alt="${type.name}アイコン" class="w-full h-full object-cover rounded-lg">
                 </div>
-                <div class="font-medium text-center">${type.name}</div>
+                <div class="font-medium flex-grow">${type.name}</div>
             </div>
         `;
         
@@ -229,16 +238,17 @@ function renderAngles() {
         const button = document.createElement("button");
         const isSelected = selectedAngle === key;
         
-        button.className = `angle-btn p-3 rounded-lg border-2 transition-all duration-200 ${
+        // 1. ボタン全体のパディングを削除
+        button.className = `angle-btn rounded-lg border-2 transition-all duration-200 ${
             isSelected ? "border-purple-500 bg-purple-50 text-purple-700" : "border-gray-200 hover:border-purple-300 hover:bg-purple-50"
         }`;
         
         button.innerHTML = `
-            <div class="flex flex-col items-center space-y-2">
-                <div class="w-10 h-10 bg-gray-100 border border-gray-300 rounded-lg flex items-center justify-center">
-                    <i data-lucide="eye" class="w-5 h-5 text-gray-500"></i>
+            <div class="flex flex-row items-center space-x-4 p-1">
+                <div class="w-24 h-24 flex-none border border-gray-300 rounded-lg flex items-center justify-center">
+                    <img src="${angleData.imageUrl}" alt="${angleData.name}アイコン" class="w-full h-full object-cover rounded-lg">
                 </div>
-                <div class="text-sm font-medium text-center">${angleData.name}</div>
+                <div class="font-medium flex-grow">${angleData.name}</div>
             </div>
         `;
         
