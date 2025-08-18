@@ -1,29 +1,25 @@
-// パッケージタイプとその詳細設定
+// パッケージタイプとその詳細設定（修正案）
 const packageTypes = {
     box: {
         name: "箱",
         imageUrl: "/images/icon-sample.jpg",
-        details: {
-            cube: "立方体",
-            thin: "薄型",
-            rectangular: "長方形",
-            cylindrical: "円筒形"
+        details: { // detailsをグループごとのオブジェクトに変更
+            形状: {
+                cube: "立方体",
+                thin: "薄型",
+                rectangular: "長方形",
+            },
+            蓋: {
+                closed: "閉じている",
+                open: "開いている",
+                insert: "差し込み式",
+                cover: "かぶせ式",
+            }
         },
         basePrompt: "white cardboard box packaging mockup"
     },
-    bottle: {
-        name: "瓶",
-        imageUrl: "/images/icon-sample.jpg",
-        details: {
-            round: "丸型",
-            square: "角型",
-            tall: "縦長",
-            spray: "スプレー"
-        },
-        basePrompt: "white bottle packaging mockup"
-    },
     pouch: {
-        name: "プラ袋",
+        name: "プラスチック袋",
         imageUrl: "/images/icon-sample.jpg",
         details: {
             stand: "スタンドパウチ",
@@ -32,6 +28,17 @@ const packageTypes = {
             zipper: "ジッパー付き"
         },
         basePrompt: "white plastic pouch packaging mockup"
+    },
+    bottle: {
+        name: "ボトル",
+        imageUrl: "/images/icon-sample.jpg",
+        details: {
+            round: "丸型",
+            square: "角型",
+            tall: "縦長",
+            spray: "スプレー"
+        },
+        basePrompt: "white bottle packaging mockup"
     },
     tube: {
         name: "チューブ",
@@ -91,7 +98,6 @@ const detailPrompts = {
     thin: "slim profile, flat rectangular shape",
     cube: "cubic shape, equal dimensions",
     rectangular: "rectangular prism, standard proportions",
-    cylindrical: "cylindrical container, round cross-section",
     round: "round bottle, circular cross-section",
     square: "square bottle, angular design",
     tall: "tall bottle, elongated proportions",
@@ -182,36 +188,46 @@ function renderPackageTypes() {
     });
 }
 
-// 詳細設定ボタンの生成
+// 詳細設定ボタンの生成（修正後）
 function renderPackageDetails() {
     if (!selectedPackageType) {
         packageDetailsContainer.innerHTML = '<div class="text-gray-500 text-center py-8">パッケージの種類を選択してください</div>';
         return;
     }
 
-    const details = packageTypes[selectedPackageType].details;
-    let buttonsHTML = "";
-    
-    Object.keys(details).forEach(key => {
-        const detail = details[key];
-        const isSelected = selectedPackageDetails.includes(key);
-        const buttonClass = isSelected ? 
-            "border-green-500 bg-green-50 text-green-700" : 
-            "border-gray-200 hover:border-green-300 hover:bg-green-50";
-        
-        buttonsHTML += `
-            <button class="detail-btn p-3 rounded-lg border-2 transition-all duration-200 ${buttonClass}" data-key="${key}">
-                <div class="flex flex-col items-center space-y-2">
-                    <div class="w-10 h-10 bg-gray-100 border border-gray-300 rounded-lg flex items-center justify-center">
-                        <i data-lucide="settings" class="w-5 h-5 text-gray-500"></i>
-                    </div>
+    const detailsGroups = packageTypes[selectedPackageType].details;
+    let groupsHTML = "";
+
+    // グループごとにループ
+    Object.keys(detailsGroups).forEach(groupName => {
+        const groupDetails = detailsGroups[groupName];
+        let buttonsHTML = "";
+
+        // 各グループ内の詳細設定ボタンを生成
+        Object.keys(groupDetails).forEach(key => {
+            const detail = groupDetails[key];
+            const isSelected = selectedPackageDetails.includes(key);
+            const buttonClass = isSelected ? 
+                "border-green-500 bg-green-50 text-green-700" : 
+                "border-gray-200 hover:border-green-300 hover:bg-green-50";
+            
+            buttonsHTML += `
+                <button class="detail-btn p-3 rounded-lg border-2 transition-all duration-200 ${buttonClass}" data-key="${key}">
                     <div class="text-sm font-medium text-center">${detail}</div>
-                </div>
-            </button>
+                </button>
+            `;
+        });
+
+        // グループごとの見出しとボタンを組み合わせる
+        groupsHTML += `
+            <div class="space-y-2">
+                <h3 class="text-md font-semibold text-gray-700">${groupName}</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">${buttonsHTML}</div>
+            </div>
         `;
     });
     
-    packageDetailsContainer.innerHTML = `<div class="grid grid-cols-2 md:grid-cols-4 gap-3">${buttonsHTML}</div>`;
+    packageDetailsContainer.innerHTML = `<div class="space-y-4">${groupsHTML}</div>`;
 
     // 詳細設定ボタンのイベントリスナー
     const detailButtons = packageDetailsContainer.querySelectorAll(".detail-btn");
