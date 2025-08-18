@@ -3,8 +3,8 @@ const packageTypes = {
     box: {
         name: "箱",
         details: {
-            thin: "薄型",
             cube: "立方体",
+            thin: "薄型",
             rectangular: "長方形",
             cylindrical: "円筒形"
         },
