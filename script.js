@@ -2,7 +2,7 @@
 const packageTypes = {
     box: {
         name: "箱",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
             形状: {
                 cube: "立方体",
@@ -20,7 +20,7 @@ const packageTypes = {
     },
     pouch: {
         name: "プラスチック袋",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
             stand: "スタンドパウチ",
             flat: "平袋",
@@ -31,7 +31,7 @@ const packageTypes = {
     },
     bottle: {
         name: "ボトル",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
             round: "丸型",
             square: "角型",
@@ -42,7 +42,7 @@ const packageTypes = {
     },
     tube: {
         name: "チューブ",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
             squeeze: "スクイーズ",
             flip: "フリップキャップ",
@@ -53,7 +53,7 @@ const packageTypes = {
     },
     can: {
         name: "缶",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
             beverage: "飲料缶",
             food: "食品缶",
@@ -64,7 +64,7 @@ const packageTypes = {
     },
     jar: {
         name: "ジャー",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
             glass: "ガラス",
             plastic: "プラスチック",
@@ -78,17 +78,17 @@ const packageTypes = {
 const angles = {
     front: {
         name: "正面",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         prompt: "front view, centered composition"
     },
     diagonal: {
         name: "斜めから",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         prompt: "3/4 angle view, slight perspective"
     },
     three_views: {
         name: "三面図",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         prompt: "three view technical drawing, front side and top view"
     }
 };
