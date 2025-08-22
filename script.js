@@ -2,7 +2,7 @@
 const packageTypes = {
     box: {
         name: "箱",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
             形状: {
                 cube: "立方体",
@@ -20,56 +20,66 @@ const packageTypes = {
     },
     pouch: {
         name: "プラスチック袋",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
-            stand: "スタンドパウチ",
-            flat: "平袋",
-            gusset: "ガゼット袋",
-            zipper: "ジッパー付き"
+            形状: {
+                stand: "スタンドパウチ",
+                flat: "平袋",
+                gusset: "ガゼット袋",
+                zipper: "ジッパー付き"
+            },
         },
         basePrompt: "white plastic pouch packaging mockup"
     },
     bottle: {
         name: "ボトル",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
-            round: "丸型",
-            square: "角型",
-            tall: "縦長",
-            spray: "スプレー"
+            形状: {
+                round: "丸型",
+                square: "角型",
+                tall: "縦長",
+                spray: "スプレー"
+            },
         },
         basePrompt: "white bottle packaging mockup"
     },
     tube: {
         name: "チューブ",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
-            squeeze: "スクイーズ",
-            flip: "フリップキャップ",
-            pump: "ポンプ",
-            twist: "ツイストキャップ"
+            形状: {
+                squeeze: "スクイーズ",
+                flip: "フリップキャップ",
+                pump: "ポンプ",
+                twist: "ツイストキャップ"
+            },
         },
         basePrompt: "white tube packaging mockup"
     },
     can: {
         name: "缶",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
-            beverage: "飲料缶",
-            food: "食品缶",
-            aerosol: "エアゾール",
-            paint: "ペンキ缶"
+            形状: {
+                beverage: "飲料缶",
+                food: "食品缶",
+                aerosol: "エアゾール",
+                paint: "ペンキ缶"
+            },
         },
         basePrompt: "white metal can packaging mockup"
     },
     jar: {
-        name: "ジャー",
-        imageUrl: "/images/icon-sample.jpg",
+        name: "その他",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
-            glass: "ガラス",
-            plastic: "プラスチック",
-            wide: "広口",
-            narrow: "狭口"
+            形状: {
+                glass: "ガラス",
+                plastic: "プラスチック",
+                wide: "広口",
+                narrow: "狭口"
+            },
         },
         basePrompt: "white jar packaging mockup"
     }
@@ -78,17 +88,17 @@ const packageTypes = {
 const angles = {
     front: {
         name: "正面",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         prompt: "front view, centered composition"
     },
     diagonal: {
         name: "斜めから",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         prompt: "3/4 angle view, slight perspective"
     },
     three_views: {
         name: "三面図",
-        imageUrl: "/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         prompt: "three view technical drawing, front side and top view"
     }
 };
