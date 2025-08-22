@@ -6,27 +6,40 @@ const packageTypes = {
         details: {
             形状: {
                 cube: "立方体",
-                thin: "薄型",
                 rectangular: "長方形",
+                round: "円筒形",
+                oval: "楕円形",
+                thin: "薄い",
+                tall: "背が高い",
+                horizontal: "横長",
+                vertical: "縦長",
             },
             蓋: {
                 closed: "閉じている",
                 open: "開いている",
                 insert: "差し込み式",
-                cover: "かぶせ式",
+                cover: "かぶせ式"
             }
         },
         basePrompt: "white cardboard box packaging mockup"
     },
     pouch: {
-        name: "プラスチック袋",
+        name: "袋",
         imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
-            形状: {
-                stand: "スタンドパウチ",
-                flat: "平袋",
+            種別: {
+                stand_pouch: "スタンドパック",
                 gusset: "ガゼット袋",
-                zipper: "ジッパー付き"
+                individual: "個包装袋",
+                flat: "平袋",
+                tetra:  "テトラ型",
+                spout_pouch: "スパウトパウチ",
+            },
+            素材: {
+                white: "プラスチック（白）",
+                transparent: "プラスチック（透明）",
+                kraft: "クラフト紙",
+                aluminum: "アルミ"
             },
         },
         basePrompt: "white plastic pouch packaging mockup"
@@ -35,53 +48,81 @@ const packageTypes = {
         name: "ボトル",
         imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
+            酒瓶: {
+                sake: "日本酒瓶",
+                beer: "ビール瓶",
+                whisky: "ウイスキー瓶",
+            },
+            ワイン瓶: {
+                bordeaux: "肩が高い（ボルドー型）",
+                burgundy: "なで肩（ブルゴーニュ型）",
+                red_wine: "赤ワイン用",
+                white_wine: "白ワイン用"
+            },
+            その他: {
+                pet_bottle:"ペットボトル",
+                juice: "ジュース瓶",
+                jam: "ジャム瓶",
+                pudding: "プリン瓶"
+            },
             形状: {
-                round: "丸型",
+                tall: "背が高い",
+                short: "背が低い",
+                mini_bottle: "小さい",
                 square: "角型",
-                tall: "縦長",
-                spray: "スプレー"
+                slim: "スリムな"
+            },
+            色: {
+                clear: "透明",
+                green: "緑",
+                amber: "茶色",
+                blue: "青",
+                frosted: "フロスト"
             },
         },
-        basePrompt: "white bottle packaging mockup"
-    },
-    tube: {
-        name: "チューブ",
-        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
-        details: {
-            形状: {
-                squeeze: "スクイーズ",
-                flip: "フリップキャップ",
-                pump: "ポンプ",
-                twist: "ツイストキャップ"
-            },
-        },
-        basePrompt: "white tube packaging mockup"
+        basePrompt: "bottle packaging mockup"
     },
     can: {
         name: "缶",
         imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
             形状: {
-                beverage: "飲料缶",
-                food: "食品缶",
-                aerosol: "エアゾール",
-                paint: "ペンキ缶"
+                tall_can: "背が高い",
+                short_can: "背が低い",
+                round: "円筒形",
+                square_can: "角缶",
+                oval: "楕円形",
+                cokie_can:"クッキー缶"
             },
+            蓋: {
+                easy_open: "イージーオープン式",
+                cover: "かぶせ式"
+            }
         },
-        basePrompt: "white metal can packaging mockup"
+        basePrompt: "can packaging mockup"
     },
-    jar: {
+    other: {
         name: "その他",
         imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         details: {
+            用途: {
+                icecream: "カップアイス",
+                milk_carton: "牛乳パック",
+                paper_bag: "紙袋",
+            },
             形状: {
+                usesketch: "添付のスケッチに合わせる",
+            },
+            素材: {
+                white: "プラスチック（白）",
+                transparent: "プラスチック（透明）",
+                paper: "紙",
+                kraft: "クラフト紙",
+                aluminum: "アルミ",
                 glass: "ガラス",
-                plastic: "プラスチック",
-                wide: "広口",
-                narrow: "狭口"
             },
         },
-        basePrompt: "white jar packaging mockup"
+        basePrompt: "packaging mockup"
     }
 };
 
@@ -127,7 +168,8 @@ const detailPrompts = {
     glass: "glass jar, transparent material",
     plastic: "plastic jar, lightweight design",
     wide: "wide mouth jar, easy access",
-    narrow: "narrow mouth jar, controlled dispensing"
+    narrow: "narrow mouth jar, controlled dispensing",
+    usesketch: "Render the package design closely following the details and layout of the provided sketch",
 };
 
 // アプリケーションの状態
