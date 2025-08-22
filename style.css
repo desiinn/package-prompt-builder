@@ -1,5 +1,7 @@
 /* カスタムスタイル（必要に応じて追加） */
-
+body {
+  overflow-y: scroll;
+}
 /* ボタンホバーエフェクトの微調整 */
 .package-btn:hover {
     transform: translateY(-1px);
