@@ -12,7 +12,6 @@ const packageTypes = {
                 thin: "薄い",
                 tall: "背が高い",
                 horizontal: "横長",
-                vertical: "縦長",
             },
             蓋: {
                 closed: "閉じている",
@@ -32,7 +31,6 @@ const packageTypes = {
                 gusset: "ガゼット袋",
                 individual: "個包装袋",
                 flat: "平袋",
-                tetra:  "テトラ型",
                 spout_pouch: "スパウトパウチ",
             },
             素材: {
@@ -66,7 +64,7 @@ const packageTypes = {
                 pudding: "プリン瓶"
             },
             形状: {
-                tall: "背が高い",
+                tall_bin: "背が高い",
                 short: "背が低い",
                 mini_bottle: "小さい",
                 square: "角型",
@@ -89,9 +87,9 @@ const packageTypes = {
             形状: {
                 tall_can: "背が高い",
                 short_can: "背が低い",
-                round: "円筒形",
+                round_can: "円筒形",
                 square_can: "角缶",
-                oval: "楕円形",
+                oval_can: "楕円形",
                 cokie_can:"クッキー缶"
             },
             蓋: {
@@ -138,38 +136,69 @@ const angles = {
         prompt: "3/4 angle view, slight perspective"
     },
     three_views: {
-        name: "三面図",
+        name: "複数方向から",
         imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
-        prompt: "A single object shown in four distinct views within a grid layout, View 1: front view. View 2: side view. View 3: rear view. View 4: top view, Orthographic projection"
+        prompt: "shown at three rotational angles"
     }
 };
 
 // 詳細プロンプトマッピング
 const detailPrompts = {
-    thin: "slim profile, flat rectangular shape",
     cube: "cubic shape, equal dimensions",
-    rectangular: "rectangular prism, standard proportions",
-    round: "round bottle, circular cross-section",
-    square: "square bottle, angular design",
-    tall: "tall bottle, elongated proportions",
-    spray: "spray bottle with trigger, ergonomic design",
-    stand: "stand-up pouch, flexible packaging",
-    flat: "flat pouch, simple rectangular shape",
+    rectangular: "rectangular shape, standard proportions",
+    round: "cylindrical shape",
+    oval: "oval shape, ",
+    thin: "thin and flat shape",
+    tall: "tall and slim shape",
+    horizontal: "wide and flat shape",
+    closed: "closed lid",
+    open: "open lid",
+    insert: "tuck-end lid",
+    cover: "telescoping lid",
+    stand_pouch: "stand-up pouch, flexible packaging",
     gusset: "gusseted pouch, expandable sides",
-    zipper: "resealable zipper pouch, convenient opening",
-    squeeze: "squeeze tube, flexible body",
-    flip: "flip-top cap, easy access",
-    pump: "pump dispenser, professional look",
-    twist: "twist cap, secure closure",
-    beverage: "beverage can, tall cylindrical shape",
-    food: "food can, shorter cylindrical shape",
-    aerosol: "aerosol can, pressurized container",
-    paint: "paint can, wide cylindrical container",
-    glass: "glass jar, transparent material",
-    plastic: "plastic jar, lightweight design",
-    wide: "wide mouth jar, easy access",
-    narrow: "narrow mouth jar, controlled dispensing",
+    individual: "individual plastic pouch, sealed plastic sachet",
+    flat: "flat pouch, simple rectangular shape",
+    spout_pouch: "",
+    white: "",
+    transparent: "",
+    kraft: "",
+    aluminum: "",
+    sake: "",
+    beer: "",
+    whisky: "",
+    bordeaux: "",
+    burgundy: "",
+    red_wine: "",
+    white_wine: "",
+    pet_bottle: "",
+    juice: "",
+    jam: "",
+    pudding: "",
+    tall_bin: "",
+    short: "",
+    mini_bottle: "",
+    square: "",
+    slim: "",
+    clear: "",
+    green: "",
+    amber: "",
+    blue: "",
+    frosted: "",
+    tall_can: "",
+    short_can: "",
+    round_can: "",
+    square_can: "",
+    oval_can: "",
+    cokie_can:"",
+    easy_open: "",
+    cover: "",
+    icecream: "",
+    milk_carton: "",
+    paper_bag: "",
     usesketch: "Render the package design closely following the details and layout of the provided sketch",
+    paper: "",
+    glass: "",
 };
 
 // アプリケーションの状態
@@ -354,7 +383,7 @@ function generatePrompt() {
             prompt += ", " + angles[selectedAngle].prompt;
         }
         
-        prompt += ", clean white background, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text, no multiple objects";
+        prompt += ", clean white background, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text,";
     } else {
         prompt += "white packaging mockup, clean background, professional quality";
     }
