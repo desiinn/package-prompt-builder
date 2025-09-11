@@ -130,7 +130,7 @@ const angles = {
     front: {
         name: "正面",
         imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
-        prompt: "front view, centered composition"
+        prompt: "front view, centered composition, No angled view, no side view, no three-quarters view"
     },
     diagonal: {
         name: "斜めから",
@@ -140,7 +140,7 @@ const angles = {
     three_views: {
         name: "三面図",
         imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
-        prompt: "three view technical drawing, front side and top view"
+        prompt: "A single object shown in four distinct views within a grid layout, View 1: front view. View 2: side view. View 3: rear view. View 4: top view, Orthographic projection"
     }
 };
 
@@ -354,7 +354,7 @@ function generatePrompt() {
             prompt += ", " + angles[selectedAngle].prompt;
         }
         
-        prompt += ", clean white background, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup";
+        prompt += ", clean white background, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text, no multiple objects";
     } else {
         prompt += "white packaging mockup, clean background, professional quality";
     }
