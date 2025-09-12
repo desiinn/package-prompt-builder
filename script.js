@@ -366,7 +366,7 @@ function renderAngles() {
 }
 // 関連画像表示
 const availableImages = [
-    { src: "images/sample.png", tags: ["sake", "tall_bin"] },
+    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["sake", "tall_bin"] },
     { src: "images/sake_short.png", tags: ["sake", "short"] },
     { src: "images/whisky_square.png", tags: ["whisky", "square"] },
     { src: "images/whisky_round.png", tags: ["whisky", "round"] },
