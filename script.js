@@ -377,13 +377,13 @@ const availableImages = [
 ];
 function updateFilteredImages() {
     dynamicImageGrid.innerHTML = ""; // コンテナを空にする
-    imageDisplayArea.classList.add("hidden");
 
     // フィルター条件を収集
     const filters = [selectedPackageType, ...selectedPackageDetails].filter(Boolean); // 空の文字列を除去
 
     if (filters.length === 0) {
-        return; // フィルター条件がなければ何もしない
+        imageDisplayArea.classList.add("hidden");
+        return;
     }
     
     // フィルター条件にすべて一致する画像を抽出
@@ -392,9 +392,10 @@ function updateFilteredImages() {
         return filters.every(filter => image.tags.includes(filter));
     });
 
+    // 画像コンテナを表示状態にする
+    imageDisplayArea.classList.remove("hidden");
+    
     if (matchingImages.length > 0) {
-        imageDisplayArea.classList.remove("hidden");
-        
         matchingImages.forEach(image => {
             const imageEl = document.createElement("img");
             imageEl.src = image.src;
@@ -407,6 +408,9 @@ function updateFilteredImages() {
 
             dynamicImageGrid.appendChild(wrapper);
         });
+    } else {
+        // マッチする画像がない場合、メッセージを生成して表示
+        dynamicImageGrid.innerHTML = '<div class="text-gray-500 text-center py-8 col-span-4">該当する画像がありません</div>';
     }
 }
 
