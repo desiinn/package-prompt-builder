@@ -367,12 +367,12 @@ function renderAngles() {
 // 関連画像表示
 const availableImages = [
     { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["sake", "tall_bin"] },
-    { src: "images/sake_short.png", tags: ["sake", "short"] },
-    { src: "images/whisky_square.png", tags: ["whisky", "square"] },
-    { src: "images/whisky_round.png", tags: ["whisky", "round"] },
-    { src: "images/wine_red.png", tags: ["bordeaux", "red_wine"] },
-    { src: "images/pouch_stand.png", tags: ["pouch", "stand_pouch"] },
-    { src: "images/pouch_stand_clear.png", tags: ["pouch", "stand_pouch", "transparent"] },
+    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["sake", "short"] },
+    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["whisky", "square"] },
+    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["whisky", "round"] },
+    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["bordeaux", "red_wine"] },
+    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["pouch", "stand_pouch"] },
+    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["pouch", "stand_pouch", "transparent"] },
     // 他の画像もこの形式で追加
 ];
 function updateFilteredImages() {
