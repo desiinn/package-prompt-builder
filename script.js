@@ -201,6 +201,18 @@ const detailPrompts = {
     glass: "glass",
 };
 
+// 関連画像データ
+const availableImages = [
+    { src: "images/icon-sample.jpg", tags: ["sake", ] },
+    { src: "images/icon-sample.jpg", tags: ["bottle", "sake", "short"] },
+    { src: "images/icon-sample.jpg", tags: ["bottle", "whisky", "square"] },
+    { src: "images/icon-sample.jpg", tags: ["bottle", "whisky", "round"] },
+    { src: "images/icon-sample.jpg", tags: ["bottle", "bordeaux", "red_wine"] },
+    { src: "images/icon-sample.jpg", tags: ["pouch", "stand_pouch"] },
+    { src: "images/icon-sample.jpg", tags: ["pouch", "stand_pouch", "transparent"] },
+    // 他の画像もこの形式で追加
+];
+
 // アプリケーションの状態
 let selectedPackageType = "";
 let selectedPackageDetails = [];
@@ -217,6 +229,7 @@ let copyMessage;
 let promptDisplay;
 let generatedPrompt;
 let selectionSummary;
+let imageDisplayArea;
 let dynamicImageGrid;
 
 // 初期化関数
@@ -272,7 +285,7 @@ function renderPackageTypes() {
     });
 }
 
-// 詳細設定ボタンの生成（修正後）
+// 詳細設定ボタンの生成
 function renderPackageDetails() {
     if (!selectedPackageType) {
         packageDetailsContainer.innerHTML = '<div class="text-gray-500 text-center py-8">パッケージの種類を選択してください</div>';
@@ -364,33 +377,27 @@ function renderAngles() {
         anglesContainer.appendChild(button);
     });
 }
-// 関連画像表示
-const availableImages = [
-    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["sake", "tall_bin"] },
-    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["sake", "short"] },
-    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["whisky", "square"] },
-    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["whisky", "round"] },
-    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["bordeaux", "red_wine"] },
-    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["pouch", "stand_pouch"] },
-    { src: "/package-prompt-builder/images/icon-sample.jpg", tags: ["pouch", "stand_pouch", "transparent"] },
-    // 他の画像もこの形式で追加
-];
+// 関連画像表示（修正版）
 function updateFilteredImages() {
     dynamicImageGrid.innerHTML = ""; // コンテナを空にする
 
     // フィルター条件を収集
     const filters = [selectedPackageType, ...selectedPackageDetails].filter(Boolean); // 空の文字列を除去
 
+    console.log('現在のフィルター:', filters); // デバッグ用
+
     if (filters.length === 0) {
         imageDisplayArea.classList.add("hidden");
         return;
     }
     
-    // フィルター条件にすべて一致する画像を抽出
+    // フィルター条件の**いずれかに**一致する画像を抽出（修正箇所）
     const matchingImages = availableImages.filter(image => {
-        // image.tagsがfiltersをすべて含んでいるかをチェック
-        return filters.every(filter => image.tags.includes(filter));
+        // image.tagsがfiltersの少なくとも1つを含んでいるかをチェック
+        return filters.some(filter => image.tags.includes(filter));
     });
+
+    console.log('マッチした画像:', matchingImages); // デバッグ用
 
     // 画像コンテナを表示状態にする
     imageDisplayArea.classList.remove("hidden");
@@ -413,7 +420,6 @@ function updateFilteredImages() {
         dynamicImageGrid.innerHTML = '<div class="text-gray-500 text-center py-8 col-span-4">該当する画像がありません</div>';
     }
 }
-
 
 // プロンプト生成
 function generatePrompt() {
