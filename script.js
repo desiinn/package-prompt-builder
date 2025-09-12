@@ -159,46 +159,46 @@ const detailPrompts = {
     gusset: "gusseted pouch, expandable sides",
     individual: "individual plastic pouch, sealed plastic sachet",
     flat: "flat pouch, simple rectangular shape",
-    spout_pouch: "",
-    white: "",
-    transparent: "",
-    kraft: "",
-    aluminum: "",
-    sake: "",
-    beer: "",
-    whisky: "",
-    bordeaux: "",
-    burgundy: "",
-    red_wine: "",
-    white_wine: "",
-    pet_bottle: "",
-    juice: "",
-    jam: "",
-    pudding: "",
-    tall_bin: "",
-    short: "",
-    mini_bottle: "",
-    square: "",
-    slim: "",
-    clear: "",
-    green: "",
-    amber: "",
-    blue: "",
-    frosted: "",
-    tall_can: "",
-    short_can: "",
-    round_can: "",
-    square_can: "",
-    oval_can: "",
-    cokie_can:"",
-    easy_open: "",
-    cover: "",
-    icecream: "",
-    milk_carton: "",
-    paper_bag: "",
+    spout_pouch: "spout pouch, a white stand-up pouch with a spout",
+    white: "white plastic",
+    transparent: "Transparent plastic",
+    kraft: "Kraft paper",
+    aluminum: "frosted aluminum",
+    sake: "sake bottle",
+    beer: "beer bottle",
+    whisky: "whisky bottle",
+    bordeaux: "bordeaux bottle",
+    burgundy: "burgundy bottle",
+    red_wine: "red wine",
+    white_wine: "white wine",
+    pet_bottle: "pet bottle",
+    juice: "juice bottle",
+    jam: "jam jar",
+    pudding: "pudding jar",
+    tall_bin: "tall bottle",
+    short: "short bottle",
+    mini_bottle: "mini bottle",
+    square: "square bottle",
+    slim: "slim bottle",
+    clear: "transparent grass bottle",
+    green: "green grass bottle",
+    amber: "amber glass bottle",
+    blue: "blue grass bottle",
+    frosted: "frosted grass",
+    tall_can: "tall can",
+    short_can: "short can",
+    round_can: "round can",
+    square_can: "square can",
+    oval_can: "oval can",
+    cokie_can:"cokie can",
+    easy_open: "easy open",
+    cover: "telescoping lid",
+    icecream: "icecream cup",
+    milk_carton: "milk carton",
+    paper_bag: "paper bag",
     usesketch: "Render the package design closely following the details and layout of the provided sketch",
-    paper: "",
-    glass: "",
+    paper: "paper",
+    glass: "glass",
 };
 
 // アプリケーションの状態
@@ -217,6 +217,7 @@ let copyMessage;
 let promptDisplay;
 let generatedPrompt;
 let selectionSummary;
+let dynamicImageGrid;
 
 // 初期化関数
 function initializeElements() {
@@ -230,6 +231,8 @@ function initializeElements() {
     promptDisplay = document.getElementById("prompt-display");
     generatedPrompt = document.getElementById("generated-prompt");
     selectionSummary = document.getElementById("selection-summary");
+    imageDisplayArea = document.getElementById("image-display-area");
+    dynamicImageGrid = document.getElementById("dynamic-image-grid");
 }
 
 // パッケージタイプボタンの生成
@@ -361,6 +364,52 @@ function renderAngles() {
         anglesContainer.appendChild(button);
     });
 }
+// 関連画像表示
+const availableImages = [
+    { src: "images/sample.png", tags: ["sake", "tall_bin"] },
+    { src: "images/sake_short.png", tags: ["sake", "short"] },
+    { src: "images/whisky_square.png", tags: ["whisky", "square"] },
+    { src: "images/whisky_round.png", tags: ["whisky", "round"] },
+    { src: "images/wine_red.png", tags: ["bordeaux", "red_wine"] },
+    { src: "images/pouch_stand.png", tags: ["pouch", "stand_pouch"] },
+    { src: "images/pouch_stand_clear.png", tags: ["pouch", "stand_pouch", "transparent"] },
+    // 他の画像もこの形式で追加
+];
+function updateFilteredImages() {
+    dynamicImageGrid.innerHTML = ""; // コンテナを空にする
+    imageDisplayArea.classList.add("hidden");
+
+    // フィルター条件を収集
+    const filters = [selectedPackageType, ...selectedPackageDetails].filter(Boolean); // 空の文字列を除去
+
+    if (filters.length === 0) {
+        return; // フィルター条件がなければ何もしない
+    }
+    
+    // フィルター条件にすべて一致する画像を抽出
+    const matchingImages = availableImages.filter(image => {
+        // image.tagsがfiltersをすべて含んでいるかをチェック
+        return filters.every(filter => image.tags.includes(filter));
+    });
+
+    if (matchingImages.length > 0) {
+        imageDisplayArea.classList.remove("hidden");
+        
+        matchingImages.forEach(image => {
+            const imageEl = document.createElement("img");
+            imageEl.src = image.src;
+            imageEl.alt = "選択されたパッケージのイメージ";
+            imageEl.className = "w-full h-full object-contain rounded-lg border border-gray-300";
+            
+            const wrapper = document.createElement("div");
+            wrapper.className = "flex justify-center items-center";
+            wrapper.appendChild(imageEl);
+
+            dynamicImageGrid.appendChild(wrapper);
+        });
+    }
+}
+
 
 // プロンプト生成
 function generatePrompt() {
@@ -396,6 +445,7 @@ function updateUI() {
     renderPackageTypes();
     renderPackageDetails();
     renderAngles();
+    updateFilteredImages(); // 新しい画像表示関数を呼び出す
     
     const hasPackageType = selectedPackageType !== "";
     showPromptBtn.disabled = !hasPackageType;

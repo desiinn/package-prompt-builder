@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>White Mockup Prompt Builder for Package</title>
+    <title>White Mockup for Package</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -17,7 +17,7 @@
                     <div class="flex items-center space-x-3">
                         <i data-lucide="package" class="w-8 h-8"></i>
                         <div>
-                            <h1 class="text-2xl font-bold">White Mockup Prompt Builder</h1>
+                            <h1 class="text-2xl font-bold">White Mockup libraly</h1>
                             <p class="text-base opacity-80">for Package</p>
                         </div>
                     </div>
@@ -50,7 +50,14 @@
                         </div>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="angles"></div>
                     </div>
-
+                    <!-- 関連画像表示 -->
+                    <div class="space-y-4">
+                        <div id="image-display-area" class="min-w-full text-center py-4 hidden">
+                            <div id="dynamic-image-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4"></div>
+                        </div>
+                        <div id="package-details" class="min-w-full">
+                            </div>
+                    </div>
                     <!-- アクションボタン -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
                         <button id="show-prompt-btn" class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-6 rounded-lg font-semibold disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed hover:from-blue-700 hover:to-indigo-800 transition-all duration-200" disabled>
