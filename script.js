@@ -499,6 +499,9 @@ function updateUI() {
     showPromptBtn.disabled = !hasPackageType;
     copyPromptBtn.disabled = !hasPackageType;
     
+    // プロンプト表示欄を非表示にする（選択内容が変わった場合）
+    promptDisplay.classList.add("hidden");
+    
     // Lucideアイコンの再レンダリング
     if (window.lucide) {
         lucide.createIcons();
