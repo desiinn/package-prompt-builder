@@ -8,18 +8,31 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+<!-- 画像プレビューモーダル -->
+<div id="image-modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+    <div class="relative bg-white rounded-lg shadow-lg p-2">
+        <button id="image-modal-close" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl" aria-label="閉じる">&times;</button>
+        <img id="image-modal-img" src="" alt="拡大画像" class="max-w-[90vw] max-h-[80vh] rounded-lg shadow" />
+    </div>
+</div>
 <body>
     <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
         <div class="max-w-4xl mx-auto">
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                 <!-- ヘッダー -->
                 <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
-                    <div class="flex items-center space-x-3">
-                        <i data-lucide="package" class="w-8 h-8"></i>
-                        <div>
-                            <h1 class="text-2xl font-bold">White Mockup libraly</h1>
-                            <p class="text-base opacity-80">for Package</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="package" class="w-8 h-8"></i>
+                            <div>
+                                <h1 class="text-2xl font-bold">White Mockup libraly</h1>
+                                <p class="text-base opacity-80">for Package</p>
+                            </div>
                         </div>
+                        <!-- ヘルプボタンを右端に -->
+                        <button id="help-btn" class="ml-4 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-40 transition" title="使い方">
+                            <i data-lucide="help-circle" class="w-7 h-7 text-white"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="p-6 space-y-6">
@@ -83,6 +96,19 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div id="help-modal-overlay" class="fixed inset-0 bg-black bg-opacity-30 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative">
+            <button id="help-modal-close" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl" aria-label="閉じる">&times;</button>
+            <h2 class="text-xl font-bold mb-4">使い方ガイド</h2>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                <li>パッケージの種類を選択してください。</li>
+                <li>詳細設定やアングルを必要に応じて選択してください。</li>
+                <li>「プロンプトを表示」ボタンでAI画像生成用のプロンプトが表示されます。</li>
+                <li>「コピー」ボタンでプロンプトをクリップボードにコピーできます。</li>
+                <li>「リセット」ボタンで選択を初期化します。</li>
+            </ul>
         </div>
     </div>
 

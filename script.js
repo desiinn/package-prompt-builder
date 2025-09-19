@@ -212,13 +212,13 @@ const detailPrompts = {
 
 // 関連画像データ
 const availableImages = [
-    { src: "images/icon-sample.jpg", tags: ["sake", ] },
-    { src: "images/icon-sample.jpg", tags: ["bottle", "sake", "short"] },
-    { src: "images/icon-sample.jpg", tags: ["bottle", "whisky", "square"] },
-    { src: "images/icon-sample.jpg", tags: ["bottle", "whisky", "round"] },
-    { src: "images/icon-sample.jpg", tags: ["bottle", "bordeaux", "red_wine"] },
-    { src: "images/icon-sample.jpg", tags: ["pouch", "stand_pouch"] },
-    { src: "images/icon-sample.jpg", tags: ["pouch", "stand_pouch", "transparent"] },
+    { src: "images/pict-sample.jpg", tags: ["sake", ] },
+    { src: "images/pict-sample.jpg", tags: ["bottle", "sake", "short"] },
+    { src: "images/pict-sample.jpg", tags: ["bottle", "whisky", "square"] },
+    { src: "images/pict-sample.jpg", tags: ["bottle", "whisky", "round"] },
+    { src: "images/pict-sample.jpg", tags: ["bottle", "bordeaux", "red_wine"] },
+    { src: "images/pict-sample.jpg", tags: ["pouch", "stand_pouch"] },
+    { src: "images/pict-sample.jpg", tags: ["pouch", "stand_pouch", "transparent"] },
     // 他の画像もこの形式で追加
 ];
 
@@ -393,22 +393,16 @@ function updateFilteredImages() {
     // フィルター条件を収集
     const filters = [selectedPackageType, ...selectedPackageDetails].filter(Boolean); // 空の文字列を除去
 
-    console.log('現在のフィルター:', filters); // デバッグ用
-
     if (filters.length === 0) {
         imageDisplayArea.classList.add("hidden");
         return;
     }
     
-    // フィルター条件の**いずれかに**一致する画像を抽出（修正箇所）
+    // フィルター条件の**いずれかに**一致する画像を抽出
     const matchingImages = availableImages.filter(image => {
-        // image.tagsがfiltersの少なくとも1つを含んでいるかをチェック
         return filters.some(filter => image.tags.includes(filter));
     });
 
-    console.log('マッチした画像:', matchingImages); // デバッグ用
-
-    // 画像コンテナを表示状態にする
     imageDisplayArea.classList.remove("hidden");
     
     if (matchingImages.length > 0) {
@@ -416,8 +410,13 @@ function updateFilteredImages() {
             const imageEl = document.createElement("img");
             imageEl.src = image.src;
             imageEl.alt = "選択されたパッケージのイメージ";
-            imageEl.className = "w-full h-full object-contain rounded-lg border border-gray-300";
+            imageEl.className = "w-full h-full object-contain rounded-lg border border-gray-300 cursor-pointer transition hover:scale-105";
+            imageEl.style.maxWidth = "200px";
+            imageEl.style.maxHeight = "200px";
             
+            // クリックでモーダル表示
+            imageEl.onclick = () => openImageModal(image.src);
+
             const wrapper = document.createElement("div");
             wrapper.className = "flex justify-center items-center";
             wrapper.appendChild(imageEl);
@@ -425,10 +424,40 @@ function updateFilteredImages() {
             dynamicImageGrid.appendChild(wrapper);
         });
     } else {
-        // マッチする画像がない場合、メッセージを生成して表示
         dynamicImageGrid.innerHTML = '<div class="text-gray-500 text-center py-8 col-span-4">該当する画像がありません</div>';
     }
 }
+
+// --- 画像プレビューモーダル制御 ---
+function openImageModal(src) {
+    const overlay = document.getElementById('image-modal-overlay');
+    const modalImg = document.getElementById('image-modal-img');
+    if (overlay && modalImg) {
+        modalImg.src = src;
+        overlay.classList.remove('hidden');
+    }
+}
+function closeImageModal() {
+    const overlay = document.getElementById('image-modal-overlay');
+    if (overlay) overlay.classList.add('hidden');
+}
+
+// ページ読み込み完了時の初期化
+document.addEventListener("DOMContentLoaded", function() {
+    initializeElements();
+    setupEventListeners();
+    updateUI();
+
+    // 画像モーダルのイベント
+    const overlay = document.getElementById('image-modal-overlay');
+    const closeBtn = document.getElementById('image-modal-close');
+    if (overlay && closeBtn) {
+        closeBtn.onclick = closeImageModal;
+        overlay.onclick = (e) => {
+            if (e.target === overlay) closeImageModal();
+        };
+    }
+});
 
 // プロンプト生成
 function generatePrompt() {
@@ -573,4 +602,17 @@ document.addEventListener("DOMContentLoaded", function() {
     initializeElements();
     setupEventListeners();
     updateUI();
+
+    // --- ヘルプボタン・モーダルのイベント設定 ---
+    const helpBtn = document.getElementById('help-btn');
+    const helpModal = document.getElementById('help-modal-overlay');
+    const helpClose = document.getElementById('help-modal-close');
+
+    if (helpBtn && helpModal && helpClose) {
+        helpBtn.onclick = () => helpModal.classList.remove('hidden');
+        helpClose.onclick = () => helpModal.classList.add('hidden');
+        helpModal.onclick = (e) => {
+            if (e.target === helpModal) helpModal.classList.add('hidden');
+        };
+    }
 });
