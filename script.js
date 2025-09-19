@@ -212,13 +212,13 @@ const detailPrompts = {
 
 // 関連画像データ
 const availableImages = [
-    { src: "images/pict-sample.jpg", tags: ["sake", ] },
-    { src: "images/pict-sample.jpg", tags: ["bottle", "sake", "short"] },
-    { src: "images/pict-sample.jpg", tags: ["bottle", "whisky", "square"] },
-    { src: "images/pict-sample.jpg", tags: ["bottle", "whisky", "round"] },
-    { src: "images/pict-sample.jpg", tags: ["bottle", "bordeaux", "red_wine"] },
-    { src: "images/pict-sample.jpg", tags: ["pouch", "stand_pouch"] },
-    { src: "images/pict-sample.jpg", tags: ["pouch", "stand_pouch", "transparent"] },
+    { src: "images/pict-sample.jpg", tags: ["bottle", "sake", ] },
+    { src: "images/pict-sample.jpg", tags: ["bottle","sake", "short"] },
+    { src: "images/pict-sample.jpg", tags: ["bottle","whisky", "square"] },
+    { src: "images/pict-sample.jpg", tags: ["bottle","whisky", "round"] },
+    { src: "images/pict-sample.jpg", tags: ["bottle","bordeaux", "red_wine"] },
+    { src: "images/pict-sample.jpg", tags: ["bottle","stand_pouch"] },
+    { src: "images/pict-sample.jpg", tags: ["bottle","stand_pouch", "transparent"] },
     // 他の画像もこの形式で追加
 ];
 
@@ -386,7 +386,7 @@ function renderAngles() {
         anglesContainer.appendChild(button);
     });
 }
-// 関連画像表示（修正版）
+// 関連画像表示（AND条件で全タグ一致のみ表示）
 function updateFilteredImages() {
     dynamicImageGrid.innerHTML = ""; // コンテナを空にする
 
@@ -398,9 +398,9 @@ function updateFilteredImages() {
         return;
     }
     
-    // フィルター条件の**いずれかに**一致する画像を抽出
+    // フィルター条件の**すべてに**一致する画像のみ抽出（AND条件）
     const matchingImages = availableImages.filter(image => {
-        return filters.some(filter => image.tags.includes(filter));
+        return filters.every(filter => image.tags.includes(filter));
     });
 
     imageDisplayArea.classList.remove("hidden");
