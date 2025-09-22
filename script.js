@@ -212,6 +212,7 @@ const detailPrompts = {
 
 // images/pict フォルダ内の画像ファイル名を手動で列挙
 const pictImages = [
+    "box-rectangular-horizontal-closed.png",
     "pouch-stand_pouch-white-multi_views.jpg"
     // 追加したい画像ファイル名をここに追記
 ];
