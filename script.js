@@ -135,7 +135,7 @@ const angles = {
         imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         prompt: "3/4 angle view, slight perspective"
     },
-    three_views: {
+    multi_views: {
         name: "複数方向から",
         imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
         prompt: "shown at three rotational angles"
@@ -210,17 +210,21 @@ const detailPrompts = {
     glass: "glass material, glossy, transparent",
 };
 
-// 関連画像データ
-const availableImages = [
-    { src: "images/pict-sample.jpg", tags: ["bottle", "sake", ] },
-    { src: "images/pict-sample.jpg", tags: ["bottle","sake", "short"] },
-    { src: "images/pict-sample.jpg", tags: ["bottle","whisky", "square"] },
-    { src: "images/pict-sample.jpg", tags: ["bottle","whisky", "round"] },
-    { src: "images/pict-sample.jpg", tags: ["bottle","bordeaux", "red_wine"] },
-    { src: "images/pict-sample.jpg", tags: ["bottle","stand_pouch"] },
-    { src: "images/pict-sample.jpg", tags: ["bottle","stand_pouch", "transparent"] },
-    // 他の画像もこの形式で追加
+// images/pict フォルダ内の画像ファイル名を手動で列挙
+const pictImages = [
+    "pouch-stand_pouch-white-multi_views.jpg"
+    // 追加したい画像ファイル名をここに追記
 ];
+
+// 関連画像データ
+const availableImages = pictImages.map(filename => {
+    // 拡張子を除いた部分をタグとして分割
+    const tags = filename.replace(/\.[^/.]+$/, "").split("-")
+    return {
+        src: "images/pict/" + filename,
+        tags: tags
+    };
+});
 
 // アプリケーションの状態
 let selectedPackageType = "";
@@ -271,11 +275,11 @@ function renderPackageTypes() {
         }`;
         
         button.innerHTML = `
-            <div class="flex flex-row items-center space-x-4 p-1">
-                <div class="w-24 h-24 flex-none border border-gray-300 rounded-lg flex items-center justify-center">
-                    <img src="${type.imageUrl}" alt="${type.name}アイコン" class="w-full h-full object-cover rounded-lg">
+            <div class="flex flex-col items-center justify-center py-2">
+                <div class="w-[120px] h-[120px] flex-none border border-gray-300 rounded-lg flex items-center justify-center mb-2 overflow-hidden bg-white">
+                    <img src="${type.imageUrl}" alt="${type.name}アイコン" class="max-w-full max-h-full object-contain rounded-lg" />
                 </div>
-                <div class="font-medium flex-grow">${type.name}</div>
+                <div class="font-medium text-center text-sm">${type.name}</div>
             </div>
         `;
         
@@ -366,11 +370,11 @@ function renderAngles() {
         }`;
         
         button.innerHTML = `
-            <div class="flex flex-row items-center space-x-4 p-1">
-                <div class="w-24 h-24 flex-none border border-gray-300 rounded-lg flex items-center justify-center">
-                    <img src="${angleData.imageUrl}" alt="${angleData.name}アイコン" class="w-full h-full object-cover rounded-lg">
+             <div class="flex flex-col items-center justify-center py-2">
+                 <div class="w-[120px] h-[120px] flex-none border border-gray-300 rounded-lg flex items-center justify-center mb-2 overflow-hidden bg-white">
+                    <img src="${angleData.imageUrl}" alt="${angleData.name}アイコン" class="max-w-full max-h-full object-contain rounded-lg">
                 </div>
-                <div class="font-medium flex-grow">${angleData.name}</div>
+                <div class="font-medium text-center text-sm">${angleData.name}</div>
             </div>
         `;
         
@@ -394,8 +398,9 @@ function updateFilteredImages() {
     const filters = [selectedPackageType, ...selectedPackageDetails].filter(Boolean); // 空の文字列を除去
 
     if (filters.length === 0) {
-        imageDisplayArea.classList.add("hidden");
-        return;
+    imageDisplayArea.classList.remove("hidden");
+    dynamicImageGrid.innerHTML = '<div class="text-gray-500 text-center py-8 col-span-4">該当する画像がありません</div>';
+    return;
     }
     
     // フィルター条件の**すべてに**一致する画像のみ抽出（AND条件）
