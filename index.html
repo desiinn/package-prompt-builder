@@ -8,14 +8,14 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<!-- 画像プレビューモーダル -->
-<div id="image-modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-    <div class="relative bg-white rounded-lg shadow-lg p-2">
-        <button id="image-modal-close" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl" aria-label="閉じる">&times;</button>
-        <img id="image-modal-img" src="" alt="拡大画像" class="max-w-[90vw] max-h-[80vh] rounded-lg shadow" />
-    </div>
-</div>
 <body>
+    <!-- 画像プレビューモーダル -->
+    <div id="image-modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="relative bg-white rounded-lg shadow-lg p-2">
+            <button id="image-modal-close" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl" aria-label="閉じる">&times;</button>
+            <img id="image-modal-img" src="" alt="拡大画像" class="max-w-[90vw] max-h-[80vh] rounded-lg shadow" />
+        </div>
+    </div>
     <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
         <div class="max-w-5xl mx-auto">
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
@@ -72,7 +72,7 @@
                             <div>
                                 <h2 class="text-base font-semibold text-gray-700 mb-2">参考画像</h2>
                                 <div id="image-display-area" class="min-w-full text-center py-4">
-                                    <div id="dynamic-image-grid" class="grid grid-cols-2 md:grid-cols-2 gap-4 px-2">
+                                    <div id="dynamic-image-grid" class="grid grid-cols-2 md:grid-cols-2 gap-4 px-2"></div>
                                 </div>
                             </div>
                             <!-- アクションボタン -->

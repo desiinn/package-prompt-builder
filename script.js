@@ -2,7 +2,7 @@
 const packageTypes = {
     box: {
         name: "箱",
-        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/box.jpeg",
         details: {
             形状: {
                 cube: "立方体",
@@ -20,7 +20,7 @@ const packageTypes = {
                 cover: "かぶせ式"
             }
         },
-        basePrompt: "white cardboard box packaging mockup"
+        basePrompt: "white paper box packaging mockup, seamless edges"
     },
     pouch: {
         name: "袋",
@@ -94,7 +94,7 @@ const packageTypes = {
             },
             蓋: {
                 easy_open: "イージーオープン式",
-                cover: "かぶせ式"
+                cover_can: "かぶせ式"
             }
         },
         basePrompt: "can packaging mockup"
@@ -127,35 +127,35 @@ const packageTypes = {
 const angles = {
     front: {
         name: "正面",
-        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/front-view.jpeg",
         prompt: "front view, centered composition, No angled view, no side view, no three-quarters view"
     },
     diagonal: {
         name: "斜めから",
-        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
+        imageUrl: "/package-prompt-builder/images/diagonal-view.jpeg",
         prompt: "3/4 angle view, slight perspective"
     },
     multi_views: {
         name: "複数方向から",
-        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
-        prompt: "shown at three rotational angles"
+        imageUrl: "/package-prompt-builder/images/multi_views.jpeg",
+        prompt: " shown from top, front, and side angles, on a single page"
     }
 };
 
 // 詳細プロンプトマッピング
 const detailPrompts = {
      // 箱
-    cube: "cubic box, equal length on all sides, modern packaging",
-    rectangular: "rectangular box, classic proportions, sturdy structure",
+    cube: "cubic box, equal length on all sides",
+    rectangular: "rectangular box",
     round: "cylindrical box, smooth round edges, seamless design",
-    oval: "oval-shaped box, soft curves, elegant appearance",
-    thin: "slim and flat box, low profile, minimal thickness",
+    oval: "oval shaped box, true elliptical shape, a perfect ellipse shape",
+    thin: "the box with a height significantly less than its width, flat box, ultra-low profile, minimal thickness",
     tall: "tall and slim box, vertical orientation, premium look",
     horizontal: "wide and flat box, landscape orientation, spacious design",
-    closed: "closed lid, secure packaging, neat finish",
-    open: "open lid, contents visible, inviting presentation",
-    insert: "tuck-end lid, easy to open and close, practical design",
-    cover: "telescoping lid, two-piece box, luxury packaging",
+    closed: "closed lid, a clean, continuous, and unified box",
+    open: "open lid",
+    insert: "Tuck-In Flap lid, Tuck-End Box, Tuck-End carton",
+    cover: "The packaging consists of a separate lid and base",
 
     // 袋
     stand_pouch: "stand-up pouch, gusseted bottom, self-standing, modern flexible packaging",
@@ -199,7 +199,7 @@ const detailPrompts = {
     oval_can: "oval can, soft curves, distinctive",
     cokie_can: "cookie tin, decorative, metallic finish",
     easy_open: "easy-open lid, pull tab, convenient",
-    cover: "telescoping lid, two-piece can, premium",
+    cover_can: "telescoping lid, two-piece can, premium",
 
     // その他
     icecream: "ice cream cup, round, single-serve, dessert packaging",
@@ -213,7 +213,7 @@ const detailPrompts = {
 // images/pict フォルダ内の画像ファイル名を手動で列挙
 const pictImages = [
     "box-rectangular-horizontal-closed.png",
-    "pouch-stand_pouch-white-multi_views.jpg"
+    "pouch-stand_pouch-white-multi_views.jpg",
     // 追加したい画像ファイル名をここに追記
 ];
 
@@ -396,7 +396,7 @@ function updateFilteredImages() {
     dynamicImageGrid.innerHTML = ""; // コンテナを空にする
 
     // フィルター条件を収集
-    const filters = [selectedPackageType, ...selectedPackageDetails].filter(Boolean); // 空の文字列を除去
+    const filters = [selectedPackageType, ...selectedPackageDetails, selectedAngle].filter(Boolean); // 空の文字列を除去
 
     if (filters.length === 0) {
     imageDisplayArea.classList.remove("hidden");
