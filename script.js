@@ -40,7 +40,7 @@ const packageTypes = {
                 aluminum: "アルミ"
             },
         },
-        basePrompt: "white plastic pouch packaging mockup"
+        basePrompt: "plastic pouch packaging mockup"
     },
     bottle: {
         name: "ボトル",
@@ -158,11 +158,11 @@ const detailPrompts = {
     cover: "The packaging consists of a separate lid and base",
 
     // 袋
-    stand_pouch: "stand-up pouch, gusseted bottom, self-standing, modern flexible packaging",
+    stand_pouch: "stand-up pouch, self-standing",
     gusset: "gusseted pouch, expandable sides, increased capacity",
     individual: "individual plastic pouch, single-serve, sealed edges",
     flat: "flat pouch, simple rectangular shape, compact",
-    spout_pouch: "spout pouch, stand-up with spout, easy pour, innovative design",
+    spout_pouch: "spout pouch, stand-up with spout, easy pour",
     white: "white plastic material, clean and pure look",
     transparent: "transparent plastic, contents visible, glossy finish",
     kraft: "kraft paper material, natural brown color, eco-friendly",
