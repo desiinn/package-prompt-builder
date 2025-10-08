@@ -160,7 +160,7 @@ const detailPrompts = {
     // 袋
     stand_pouch: "stand-up pouch, self-standing",
     gusset: "gusseted pouch, expandable sides, increased capacity",
-    individual: "individual plastic pouch, single-serve, sealed edges",
+    individual: "flat pouch, individual plastic pouch, top and bottom sealed only",
     flat: "flat pouch, simple rectangular shape, compact",
     spout_pouch: "spout pouch, stand-up with spout, easy pour",
     white: "white plastic material, clean and pure look",
