@@ -31,7 +31,6 @@ const packageTypes = {
                 gusset: "ガゼット袋",
                 individual: "個包装袋",
                 flat: "平袋",
-                spout_pouch: "スパウトパウチ",
             },
             素材: {
                 white: "プラスチック（白）",
