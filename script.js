@@ -1,125 +1,53 @@
 // パッケージタイプとその詳細設定（修正案）
 const packageTypes = {
-    box: {
-        name: "箱",
+    cube: {
+        name: "立方体",
         imageUrl: "/package-prompt-builder/images/box.jpeg",
-        details: {
-            形状: {
-                cube: "立方体",
-                rectangular: "長方形",
-                round: "円筒形",
-                oval: "楕円形",
-                thin: "薄い",
-                tall: "背が高い",
-                horizontal: "横長",
-            },
-            蓋: {
-                closed: "閉じている",
-                open: "開いている",
-                insert: "差し込み式",
-                cover: "かぶせ式"
-            }
-        },
-        basePrompt: "white paper box packaging mockup, seamless edges"
+        basePrompt: "white paper box packaging mockup, cubic box, equal length on all sides, seamless edges"
     },
-    pouch: {
-        name: "袋",
-        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
-        details: {
-            種別: {
-                stand_pouch: "スタンドパック",
-                gusset: "ガゼット袋",
-                individual: "個包装袋",
-                flat: "平袋",
-            },
-            素材: {
-                white: "プラスチック（白）",
-                transparent: "プラスチック（透明）",
-                kraft: "クラフト紙",
-                aluminum: "アルミ"
-            },
-        },
-        basePrompt: "plastic pouch packaging mockup"
+    round: {
+        name: "円筒形",
+        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        basePrompt: "white paper box packaging mockup, cylindrical box, smooth round edges, seamless design"
     },
-    bottle: {
-        name: "ボトル",
-        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
-        details: {
-            酒瓶: {
-                sake: "日本酒瓶",
-                beer: "ビール瓶",
-                whisky: "ウイスキー瓶",
-            },
-            ワイン瓶: {
-                bordeaux: "肩が高い（ボルドー型）",
-                burgundy: "なで肩（ブルゴーニュ型）",
-                red_wine: "赤ワイン用",
-                white_wine: "白ワイン用"
-            },
-            その他: {
-                pet_bottle:"ペットボトル",
-                juice: "ジュース瓶",
-                jam: "ジャム瓶",
-                pudding: "プリン瓶"
-            },
-            形状: {
-                tall_bin: "背が高い",
-                short: "背が低い",
-                mini_bottle: "小さい",
-                square: "角型",
-                slim: "スリムな"
-            },
-            色: {
-                clear: "透明",
-                green: "緑",
-                amber: "茶色",
-                blue: "青",
-                frosted: "フロスト"
-            },
-        },
-        basePrompt: "bottle packaging mockup"
+    oval: {
+        name: "楕円形",
+        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        basePrompt: "white paper box packaging mockup, oval shaped box, true elliptical shape, a perfect ellipse shape"
     },
-    can: {
-        name: "缶",
-        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
-        details: {
-            形状: {
-                tall_can: "背が高い",
-                short_can: "背が低い",
-                round_can: "円筒形",
-                square_can: "角缶",
-                oval_can: "楕円形",
-                cokie_can:"クッキー缶"
-            },
-            蓋: {
-                easy_open: "イージーオープン式",
-                cover_can: "かぶせ式"
-            }
-        },
-        basePrompt: "can packaging mockup"
+    thin: {
+        name: "薄い",
+        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        basePrompt: "white paper box packaging mockup, the box with a height significantly less than its width, flat box, ultra-low profile, minimal thickness, seamless edges"
     },
-    other: {
-        name: "その他",
-        imageUrl: "/package-prompt-builder/images/icon-sample.jpg",
-        details: {
-            用途: {
-                icecream: "カップアイス",
-                milk_carton: "牛乳パック",
-                paper_bag: "紙袋",
-            },
-            形状: {
-                usesketch: "添付のスケッチに合わせる",
-            },
-            素材: {
-                white: "プラスチック（白）",
-                transparent: "プラスチック（透明）",
-                paper: "紙",
-                kraft: "クラフト紙",
-                aluminum: "アルミ",
-                glass: "ガラス",
-            },
-        },
-        basePrompt: "packaging mockup"
+    tall: {
+        name: "背が高い",
+        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        basePrompt: "white paper box packaging mockup, tall and slim box, vertical orientation, premium look, seamless edges"
+    },
+    horizontal: {
+        name: "横長",
+        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        basePrompt: "white paper box packaging mockup, wide and flat box, landscape orientation, spacious design, seamless edges"
+    },
+};
+
+const packageDetails = {
+    closed: {
+        name: "閉じている",
+        prompt: "closed lid, a clean, continuous, and unified box"
+    },
+    open: {
+        name: "開いている",
+        prompt: "open lid"
+    },
+    insert: {
+        name: "差し込み式",
+        prompt: "Tuck-In Flap lid, Tuck-End Box, Tuck-End carton"
+    },
+    cover: {
+        name: "かぶせ式",
+        prompt: "The packaging consists of a separate lid and base"
     }
 };
 
@@ -139,74 +67,6 @@ const angles = {
         imageUrl: "/package-prompt-builder/images/multi_views.jpeg",
         prompt: " shown from top, front, and side angles, on a single page"
     }
-};
-
-// 詳細プロンプトマッピング
-const detailPrompts = {
-     // 箱
-    cube: "cubic box, equal length on all sides",
-    rectangular: "rectangular box",
-    round: "cylindrical box, smooth round edges, seamless design",
-    oval: "oval shaped box, true elliptical shape, a perfect ellipse shape",
-    thin: "the box with a height significantly less than its width, flat box, ultra-low profile, minimal thickness",
-    tall: "tall and slim box, vertical orientation, premium look",
-    horizontal: "wide and flat box, landscape orientation, spacious design",
-    closed: "closed lid, a clean, continuous, and unified box",
-    open: "open lid",
-    insert: "Tuck-In Flap lid, Tuck-End Box, Tuck-End carton",
-    cover: "The packaging consists of a separate lid and base",
-
-    // 袋
-    stand_pouch: "stand-up pouch, self-standing",
-    gusset: "gusseted pouch, expandable sides, increased capacity",
-    individual: "flat pouch, individual plastic pouch, top and bottom sealed only",
-    flat: "flat pouch, simple rectangular shape, compact",
-    spout_pouch: "spout pouch, stand-up with spout, easy pour",
-    white: "white plastic material, clean and pure look",
-    transparent: "transparent plastic, contents visible, glossy finish",
-    kraft: "kraft paper material, natural brown color, eco-friendly",
-    aluminum: "matte aluminum, metallic finish, premium protection",
-
-    // ボトル
-    sake: "traditional sake bottle, slender neck, Japanese style",
-    beer: "classic beer bottle, amber glass, short neck",
-    whisky: "whisky bottle, broad shoulders, premium glass",
-    bordeaux: "bordeaux wine bottle, tall with high shoulders, elegant",
-    burgundy: "burgundy wine bottle, gently sloping shoulders, refined",
-    red_wine: "red wine bottle, deep color, classic shape",
-    white_wine: "white wine bottle, clear glass, slim profile",
-    pet_bottle: "PET plastic bottle, lightweight, modern",
-    juice: "juice bottle, vibrant, wide mouth",
-    jam: "jam jar, round glass, wide opening",
-    pudding: "pudding jar, small glass, dessert packaging",
-    tall_bin: "tall bottle, elongated shape, premium feel",
-    short: "short bottle, compact, sturdy",
-    mini_bottle: "miniature bottle, sample size, cute design",
-    square: "square bottle, sharp edges, modern look",
-    slim: "slim bottle, narrow profile, elegant",
-    clear: "clear glass, transparent, shows contents",
-    green: "green glass, classic wine bottle color",
-    amber: "amber glass, protects from light, vintage style",
-    blue: "blue glass, unique, eye-catching",
-    frosted: "frosted glass, matte finish, soft touch",
-
-    // 缶
-    tall_can: "tall can, slim and elongated, energy drink style",
-    short_can: "short can, compact, soda style",
-    round_can: "round can, cylindrical, smooth edges",
-    square_can: "square can, modern, unique shape",
-    oval_can: "oval can, soft curves, distinctive",
-    cokie_can: "cookie tin, decorative, metallic finish",
-    easy_open: "easy-open lid, pull tab, convenient",
-    cover_can: "telescoping lid, two-piece can, premium",
-
-    // その他
-    icecream: "ice cream cup, round, single-serve, dessert packaging",
-    milk_carton: "milk carton, gable top, classic paper packaging",
-    paper_bag: "paper bag, flat bottom, eco-friendly",
-    usesketch: "Render the package design closely following the details and layout of the provided sketch, match proportions and features accurately",
-    paper: "paper material, matte finish, recyclable",
-    glass: "glass material, glossy, transparent",
 };
 
 // images/pict フォルダ内の画像ファイル名を手動で列挙
@@ -288,7 +148,6 @@ const pictImages = [
     "box-round-thin-open-cover-4.jpeg",
     "box-round-thin-open-cover-5.jpeg",
     "box-round-thin-open-cover.jpeg",
-    "pouch-stand_pouch-white-multi_views.jpg",
     // 追加したい画像ファイル名をここに追記
 ];
 
@@ -374,48 +233,29 @@ function renderPackageTypes() {
     });
 }
 
-// 詳細設定ボタンの生成
+// 蓋の設定ボタンの生成
 function renderPackageDetails() {
-    if (!selectedPackageType) {
-        packageDetailsContainer.innerHTML = '<div class="text-gray-500 text-center py-8">パッケージの種類を選択してください</div>';
-        return;
-    }
+    let buttonsHTML = "";
 
-    const detailsGroups = packageTypes[selectedPackageType].details;
-    let groupsHTML = "";
-
-    // グループごとにループ
-    Object.keys(detailsGroups).forEach(groupName => {
-        const groupDetails = detailsGroups[groupName];
-        let buttonsHTML = "";
-
-        // 各グループ内の詳細設定ボタンを生成
-        Object.keys(groupDetails).forEach(key => {
-            const detail = groupDetails[key];
-            const isSelected = selectedPackageDetails.includes(key);
-            const buttonClass = isSelected ? 
-                "border-green-500 bg-green-50 text-green-700" : 
-                "border-gray-200 hover:border-green-300 hover:bg-green-50";
-            
-            buttonsHTML += `
-                <button class="detail-btn p-3 rounded-lg border-2 transition-all duration-200 ${buttonClass}" data-key="${key}">
-                    <div class="text-sm font-medium text-center">${detail}</div>
-                </button>
-            `;
-        });
-
-        // グループごとの見出しとボタンを組み合わせる
-        groupsHTML += `
-            <div class="space-y-2">
-                <h3 class="text-md font-semibold text-gray-700">${groupName}</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">${buttonsHTML}</div>
-            </div>
+    Object.keys(packageDetails).forEach(key => {
+        const detail = packageDetails[key];
+        const isSelected = selectedPackageDetails.includes(key);
+        const buttonClass = isSelected ? 
+            "border-green-500 bg-green-50 text-green-700" : 
+            "border-gray-200 hover:border-green-300 hover:bg-green-50";
+        
+        buttonsHTML += `
+            <button class="detail-btn p-3 rounded-lg border-2 transition-all duration-200 ${buttonClass}" data-key="${key}">
+                <div class="text-sm font-medium text-center">${detail.name}</div>
+            </button>
         `;
     });
-    
-    packageDetailsContainer.innerHTML = `<div class="space-y-4">${groupsHTML}</div>`;
 
-    // 詳細設定ボタンのイベントリスナー
+    packageDetailsContainer.innerHTML = `
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">${buttonsHTML}</div>
+    `;
+
+    // 蓋の設定ボタンのイベントリスナー
     const detailButtons = packageDetailsContainer.querySelectorAll(".detail-btn");
     detailButtons.forEach(button => {
         button.onclick = function() {
@@ -430,6 +270,7 @@ function renderPackageDetails() {
         };
     });
 }
+
 
 // アングルボタンの生成
 function renderAngles() {
@@ -542,31 +383,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // プロンプト生成
 function generatePrompt() {
-    let prompt = "Create a professional ";
-    
+    const parts = [];
+
+    // 形状（basePrompt）またはフォールバック
     if (selectedPackageType && packageTypes[selectedPackageType]) {
-        prompt += packageTypes[selectedPackageType].basePrompt;
-        
-        if (selectedPackageDetails.length > 0) {
-            const detailPromptTexts = selectedPackageDetails
-                .filter(detail => detailPrompts[detail])
-                .map(detail => detailPrompts[detail]);
-            
-            if (detailPromptTexts.length > 0) {
-                prompt += ", " + detailPromptTexts.join(", ");
-            }
-        }
-        
-        if (selectedAngle && angles[selectedAngle]) {
-            prompt += ", " + angles[selectedAngle].prompt;
-        }
-        
-        prompt += ", clean white background, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text,";
+        const base = packageTypes[selectedPackageType].basePrompt || "";
+        if (base) parts.push(base);
     } else {
-        prompt += "white packaging mockup, clean background, professional quality";
+        parts.push("white packaging mockup, clean background, professional quality");
     }
-    
-    return prompt;
+
+    // 蓋（重複チェックして追加）
+    selectedPackageDetails.forEach(detailKey => {
+        const detailPrompt = packageDetails[detailKey]?.prompt;
+        if (!detailPrompt) return;
+        const isDup = parts.some(p => p.includes(detailPrompt) || detailPrompt.includes(p));
+        if (!isDup) parts.push(detailPrompt);
+    });
+
+    // アングル
+    if (selectedAngle && angles[selectedAngle]) {
+        const anglePrompt = angles[selectedAngle].prompt;
+        if (anglePrompt && !parts.includes(anglePrompt)) parts.push(anglePrompt);
+    }
+
+    // 共通付加句
+    parts.push("clean white background, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text");
+
+    return "Create a professional " + parts.join(", ");
 }
 
 // UI更新
@@ -596,31 +440,15 @@ function showPrompt() {
     const prompt = generatePrompt();
     generatedPrompt.textContent = prompt;
     
-    // 選択内容の表示
     let summaryHTML = `<div><strong>パッケージタイプ:</strong> ${packageTypes[selectedPackageType].name}</div>`;
     
-    // 修正箇所
     if (selectedPackageDetails.length > 0) {
-        // すべての詳細設定グループから名前を取得するように変更
-        const allDetails = Object.values(packageTypes[selectedPackageType].details).reduce((acc, current) => {
-            return acc.concat(Object.keys(current));
-        }, []);
-
         const detailNames = selectedPackageDetails
-            .filter(detailKey => allDetails.includes(detailKey))
-            .map(detailKey => {
-                // グループをループして正しい名前を見つける
-                let name = '';
-                Object.values(packageTypes[selectedPackageType].details).forEach(group => {
-                    if (group[detailKey]) {
-                        name = group[detailKey];
-                    }
-                });
-                return name;
-            });
+            .filter(detailKey => packageDetails[detailKey])
+            .map(detailKey => packageDetails[detailKey].name);
         
         if (detailNames.length > 0) {
-            summaryHTML += `<div><strong>詳細設定:</strong> ${detailNames.join(", ")}</div>`;
+            summaryHTML += `<div><strong>蓋の設定:</strong> ${detailNames.join(", ")}</div>`;
         }
     }
     
