@@ -2,32 +2,32 @@
 const packageTypes = {
     cube: {
         name: "立方体",
-        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        imageUrl: "/package-prompt-builder/images/cube.jpeg",
         basePrompt: "white paper box packaging mockup, cubic box, equal length on all sides, seamless edges"
     },
     round: {
         name: "円筒形",
-        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        imageUrl: "/package-prompt-builder/images/round.jpeg",
         basePrompt: "white paper box packaging mockup, cylindrical box, smooth round edges, seamless design"
     },
     oval: {
         name: "楕円形",
-        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        imageUrl: "/package-prompt-builder/images/oval.jpeg",
         basePrompt: "white paper box packaging mockup, oval shaped box, true elliptical shape, a perfect ellipse shape"
     },
     thin: {
         name: "薄い",
-        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        imageUrl: "/package-prompt-builder/images/thin.jpeg",
         basePrompt: "white paper box packaging mockup, the box with a height significantly less than its width, flat box, ultra-low profile, minimal thickness, seamless edges"
     },
     tall: {
         name: "背が高い",
-        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        imageUrl: "/package-prompt-builder/images/tall.jpeg",
         basePrompt: "white paper box packaging mockup, tall and slim box, vertical orientation, premium look, seamless edges"
     },
     horizontal: {
         name: "横長",
-        imageUrl: "/package-prompt-builder/images/box.jpeg",
+        imageUrl: "/package-prompt-builder/images/horizontal.jpeg",
         basePrompt: "white paper box packaging mockup, wide and flat box, landscape orientation, spacious design, seamless edges"
     },
 };
