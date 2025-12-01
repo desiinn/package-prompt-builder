@@ -460,12 +460,18 @@ function updateUI() {
 
 // プロンプト表示
 function showPrompt() {
-    if (!selectedPackageType) return;
-    
+    const hasPackageTypeOrNote = selectedPackageType !== "" || (selectedCustomNote && selectedCustomNote.length > 0);
+    if (!hasPackageTypeOrNote) return;
+
     const prompt = generatePrompt();
     generatedPrompt.textContent = prompt;
     
-    let summaryHTML = `<div><strong>パッケージタイプ:</strong> ${packageTypes[selectedPackageType].name}</div>`;
+     let summaryHTML = "";
+    
+    // パッケージタイプがあれば表示
+    if (selectedPackageType) {
+        summaryHTML += `<div><strong>パッケージタイプ:</strong> ${packageTypes[selectedPackageType].name}</div>`;
+    }
     
     if (selectedPackageDetails.length > 0) {
         const detailNames = selectedPackageDetails
@@ -479,6 +485,11 @@ function showPrompt() {
     
     if (selectedAngle) {
         summaryHTML += `<div><strong>アングル:</strong> ${angles[selectedAngle].name}</div>`;
+    }
+    
+    // 自由記述があれば表示
+    if (selectedCustomNote) {
+        summaryHTML += `<div><strong>その他（自由記述）:</strong> ${selectedCustomNote}</div>`;
     }
     
     selectionSummary.innerHTML = summaryHTML;
