@@ -8,7 +8,7 @@ const packageTypes = {
     flat: {
         name: "平袋",
         imageUrl: "/package-prompt-builder/images/flat.jpeg",
-        basePrompt: "flat pouch, simple rectangular shape, compact"
+        basePrompt: "flat pouch, simple rectangular shape, with sealed top and bottom edges only, smooth sides without creases or seals"
     },
     individual: {
         name: "個包装袋",
@@ -287,7 +287,7 @@ function generatePrompt() {
     parts.push("clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text");
 
     // parts が空でも共通句は付くので空チェック不要
-    return "Generate a white packaging mockup image " + parts.join(", ");
+    return "Generate a white packaging mockup image of a " + parts.join(", ");
 }
 
 // UI更新
