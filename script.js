@@ -402,16 +402,19 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// プロンプト生成
+// プロンプト生成（修正）
 function generatePrompt() {
     const parts = [];
 
-    // 形状（basePrompt）またはフォールバック
+    // 形状（basePrompt）があれば先に追加
     if (selectedPackageType && packageTypes[selectedPackageType]) {
         const base = packageTypes[selectedPackageType].basePrompt || "";
         if (base) parts.push(base);
-    } else {
-        parts.push("white packaging mockup, clean background, professional quality");
+    }
+
+    // 追加：自由記述があれば形状の直後に挿入（プレフィックスなし）
+    if (selectedCustomNote && selectedCustomNote.length > 0) {
+        parts.push(selectedCustomNote);
     }
 
     // 蓋（重複チェックして追加）
@@ -428,15 +431,11 @@ function generatePrompt() {
         if (anglePrompt && !parts.includes(anglePrompt)) parts.push(anglePrompt);
     }
 
-    // 追加：自由記述があれば挿入（プレフィックスなし）
-    if (selectedCustomNote && selectedCustomNote.length > 0) {
-        parts.push(selectedCustomNote);
-    }
+    // 共通付加句（先頭の "Generate a white paper box mockup image" は呼び出し側で付与）
+    parts.push("clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text");
 
-    // 共通付加句
-    parts.push("clean white background, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text");
-
-    return "Create a professional " + parts.join(", ");
+    // parts が空でも共通句は付くので空チェック不要
+    return "Generate a white paper box mockup image " + parts.join(", ");
 }
 
 // UI更新
