@@ -23,7 +23,7 @@ const packageTypes = {
     paper_cup: {
         name: "カップ",
         imageUrl: "/package-prompt-builder/images/cup.jpeg",
-        basePrompt: "cup"
+        basePrompt: "paper cup"
     },
 };
 
@@ -287,7 +287,7 @@ function generatePrompt() {
     parts.push("clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text");
 
     // parts が空でも共通句は付くので空チェック不要
-    return "Generate a white paper box mockup image " + parts.join(", ");
+    return "Generate a white packaging mockup image " + parts.join(", ");
 }
 
 // UI更新
