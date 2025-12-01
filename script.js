@@ -198,19 +198,7 @@ function initializeElements() {
     dynamicImageGrid = document.getElementById("dynamic-image-grid");
 
     // 追加：パッケージ種類エリアの直下に自由記述欄を動的に挿入（なければ）
-    if (packageTypesContainer && !document.getElementById("custom-note-container")) {
-        const container = document.createElement("div");
-        container.id = "custom-note-container";
-        container.className = "mt-3";
-        container.innerHTML = `
-            <label class="text-sm text-gray-700 block mb-1">その他（自由記述）</label>
-            <textarea id="custom-note-input" placeholder="添付のスケッチの形状の箱" class="w-full p-2 border border-gray-200 rounded-md text-sm text-gray-700 resize-none" rows="2"></textarea>
-        `;
-        // packageTypesContainerの次の位置に挿入
-        packageTypesContainer.parentNode.insertBefore(container, packageTypesContainer.nextSibling);
-    }
-
-    customNoteInput = document.getElementById("custom-note-input");
+     customNoteInput = document.getElementById("custom-note-input");
     if (customNoteInput) {
         selectedCustomNote = customNoteInput.value.trim();
     }
