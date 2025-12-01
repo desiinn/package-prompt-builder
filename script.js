@@ -1,55 +1,32 @@
 // パッケージタイプとその詳細設定（修正案）
 const packageTypes = {
-    cube: {
-        name: "立方体",
-        imageUrl: "/package-prompt-builder/images/cube.jpeg",
-        basePrompt: "cubic box, equal length on all sides, seamless edges"
+    stand_pouch: {
+        name: "スタンドパック",
+        imageUrl: "/package-prompt-builder/images/stand_pouch.jpeg",
+        basePrompt: "stand-up pouch, self-standing"
     },
-    thin: {
-        name: "薄い",
-        imageUrl: "/package-prompt-builder/images/thin.jpeg",
-        basePrompt: "the box with a height significantly less than its width, flat box, ultra-low profile, minimal thickness, seamless edges"
+    flat: {
+        name: "平袋",
+        imageUrl: "/package-prompt-builder/images/flat.jpeg",
+        basePrompt: "flat pouch, simple rectangular shape, compact"
     },
-    tall: {
-        name: "背が高い",
-        imageUrl: "/package-prompt-builder/images/tall.jpeg",
-        basePrompt: "tall and slim box, vertical orientation, premium look, seamless edges"
+    individual: {
+        name: "個包装袋",
+        imageUrl: "/package-prompt-builder/images/individual.jpeg",
+        basePrompt: "flat pouch, individual plastic pouch, top and bottom sealed only"
     },
-    horizontal: {
-        name: "横長",
-        imageUrl: "/package-prompt-builder/images/horizontal.jpeg",
-        basePrompt: "wide and flat box, landscape orientation, spacious design, seamless edges"
+    can: {
+        name: "缶",
+        imageUrl: "/package-prompt-builder/images/can.jpeg",
+        basePrompt: "can"
     },
-     round: {
-        name: "円筒形",
-        imageUrl: "/package-prompt-builder/images/round.jpeg",
-        basePrompt: "cylindrical box, smooth round edges, seamless design"
-    },
-    oval: {
-        name: "楕円形",
-        imageUrl: "/package-prompt-builder/images/oval.jpeg",
-        basePrompt: "oval shaped box, true elliptical shape, a perfect ellipse shape"
+    paper_cup: {
+        name: "カップ",
+        imageUrl: "/package-prompt-builder/images/cup.jpeg",
+        basePrompt: "cup"
     },
 };
 
-const packageDetails = {
-    closed: {
-        name: "閉じている",
-        prompt: "closed lid, a clean, continuous, and unified box"
-    },
-    open: {
-        name: "開いている",
-        prompt: "open lid"
-    },
-    insert: {
-        name: "差し込み式",
-        prompt: "Tuck-In Flap lid, Tuck-End Box, Tuck-End carton"
-    },
-    cover: {
-        name: "かぶせ式",
-        prompt: "The packaging consists of a separate lid and base"
-    }
-};
 
 const angles = {
     front: {
@@ -71,62 +48,7 @@ const angles = {
 
 // images/pict フォルダ内の画像ファイル名を手動で列挙
 const pictImages = [
-    "box-cube-closed-cover-multi_views.jpeg",
-    "box-cube-cover-closed-diagonal.jpeg",
-    "box-cube-cover-closed-front-2.jpeg",
-    "box-cube-cover-closed-front.jpeg",
-    "box-cube-insert-closed-diagonal-3.jpeg",
-    "box-cube-insert-closed-diagonal.jpeg",
-    "box-cube-insert-closed-front-1.jpeg",
-    "box-horizontal-closed-cover-diagonal-3.jpeg",
-    "box-horizontal-closed-cover-diagonal-4.jpeg",
-    "box-horizontal-closed-cover-diagonal-5.jpeg",
-    "box-horizontal-closed-insert-front.jpeg",
-    "box-horizontal-cover-open-diagonal.jpeg",
-    "box-horizontal-insert-closed-diagonal-2.jpeg",
-    "box-horizontal-insert-closed-diagonal-3.jpeg",
-    "box-horizontal-insert-closed-diagonal.jpeg",
-    "box-horizontal-insert-open-diagonal-2.jpeg",
-    "box-horizontal-insert-open-diagonal-3.jpeg",
-    "box-horizontal-insert-open-diagonal.jpeg",
-    "box-horizontal-open-cover-diagonal-2.jpeg",
-    "box-horizontal-open-cover-diagonal.jpeg",
-    "box-oval-closed-cover-diagonal-2.jpeg",
-    "box-oval-closed-cover-diagonal-3.jpeg",
-    "box-oval-closed-cover-diagonal.jpeg",
-    "box-oval-closed-cover-multi_views.jpeg",
-    "box-oval-cover-open-diagonal-2.jpeg",
-    "box-oval-cover-open-diagonal-3.jpeg",
-    "box-oval-cover-open-diagonal-4.jpeg",
-    "box-oval-cover-open-diagonal-5.jpeg",
-    "box-oval-cover-open-diagonal-6.jpeg",
-    "box-round-cover-closed.jpeg",
-    "box-round-open-cover-2.jpeg",
-    "box-round-open-cover-3.jpeg",
-    "box-round-open-cover-4.jpeg",
-    "box-round-open-cover-6.jpeg",
-    "box-round-open-cover-8.jpeg",
-    "box-round-open-cover.jpeg",
-    "box-round-oval-thin-cover-closed.jpeg",
-    "box-round-tall-closed-2.jpeg",
-    "box-round-tall-closed-cover.jpeg",
-    "box-round-tall-closed.jpeg",
-    "box-round-thin-cover-closed-2.jpeg",
-    "box-round-thin-cover-closed-3.jpeg",
-    "box-round-thin-open-cover-2.jpeg",
-    "box-round-thin-open-cover-3.jpeg",
-    "box-tall-closed-insert-diagonal-2.jpeg",
-    "box-tall-closed-insert-diagonal-3.jpeg",
-    "box-tall-closed-insert-diagonal.jpeg",
-    "box-thin-cover-closed-diagonal-2.jpeg",
-    "box-thin-cover-closed-diagonal-3.jpeg",
-    "box-thin-cover-closed-diagonal-4.jpeg",
-    "box-thin-cover-closed-diagonal.jpeg",
-    "box-thin-horizontal-closed-cover-diagonal -2.jpeg",
-    "box-thin-horizontal-closed-cover-diagonal-2.jpeg",
-    "box-thin-horizontal-closed-cover-diagonal.jpeg",
-    "box-thin-horizontal-insert-closed-front.jpeg",
-    "box-thin-open-cover-diagonal.jpeg",
+    
     // 追加したい画像ファイル名をここに追記
 ];
 
@@ -142,7 +64,6 @@ const availableImages = pictImages.map(filename => {
 
 // アプリケーションの状態
 let selectedPackageType = "";
-let selectedPackageDetails = [];
 let selectedAngle = "";
 let selectedCustomNote = "";
 
@@ -164,7 +85,6 @@ let customNoteInput;
 // 初期化関数
 function initializeElements() {
     packageTypesContainer = document.getElementById("package-types");
-    packageDetailsContainer = document.getElementById("package-details");
     anglesContainer = document.getElementById("angles");
     showPromptBtn = document.getElementById("show-prompt-btn");
     copyPromptBtn = document.getElementById("copy-prompt-btn");
@@ -221,45 +141,6 @@ function renderPackageTypes() {
     });
 }
 
-// 蓋の設定ボタンの生成
-function renderPackageDetails() {
-    let buttonsHTML = "";
-
-    Object.keys(packageDetails).forEach(key => {
-        const detail = packageDetails[key];
-        const isSelected = selectedPackageDetails.includes(key);
-        const buttonClass = isSelected ? 
-            "border-green-500 bg-green-50 text-green-700" : 
-            "border-gray-200 hover:border-green-300 hover:bg-green-50";
-        
-        buttonsHTML += `
-            <button class="detail-btn p-3 rounded-lg border-2 transition-all duration-200 ${buttonClass}" data-key="${key}">
-                <div class="text-sm font-medium text-center">${detail.name}</div>
-            </button>
-        `;
-    });
-
-    packageDetailsContainer.innerHTML = `
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">${buttonsHTML}</div>
-    `;
-
-    // 蓋の設定ボタンのイベントリスナー
-    const detailButtons = packageDetailsContainer.querySelectorAll(".detail-btn");
-    detailButtons.forEach(button => {
-        button.onclick = function() {
-            const key = this.getAttribute("data-key");
-            const index = selectedPackageDetails.indexOf(key);
-            if (index !== -1) {
-                selectedPackageDetails.splice(index, 1);
-            } else {
-                selectedPackageDetails.push(key);
-            }
-            updateUI();
-        };
-    });
-}
-
-
 // アングルボタンの生成
 function renderAngles() {
     anglesContainer.innerHTML = "";
@@ -300,7 +181,7 @@ function updateFilteredImages() {
     dynamicImageGrid.innerHTML = ""; // コンテナを空にする
 
     // フィルター条件を収集
-    const filters = [selectedPackageType, ...selectedPackageDetails, selectedAngle].filter(Boolean); // 空の文字列を除去
+    const filters = [selectedPackageType, selectedAngle].filter(Boolean); // 空の文字列を除去
 
     if (filters.length === 0) {
     imageDisplayArea.classList.remove("hidden");
@@ -396,14 +277,6 @@ function generatePrompt() {
         parts.push(selectedCustomNote);
     }
 
-    // 蓋（重複チェックして追加）
-    selectedPackageDetails.forEach(detailKey => {
-        const detailPrompt = packageDetails[detailKey]?.prompt;
-        if (!detailPrompt) return;
-        const isDup = parts.some(p => p.includes(detailPrompt) || detailPrompt.includes(p));
-        if (!isDup) parts.push(detailPrompt);
-    });
-
     // アングル
     if (selectedAngle && angles[selectedAngle]) {
         const anglePrompt = angles[selectedAngle].prompt;
@@ -420,7 +293,6 @@ function generatePrompt() {
 // UI更新
 function updateUI() {
     renderPackageTypes();
-    renderPackageDetails();
     renderAngles();
     updateFilteredImages(); // 新しい画像表示関数を呼び出す
     
@@ -452,16 +324,7 @@ function showPrompt() {
         summaryHTML += `<div><strong>パッケージタイプ:</strong> ${packageTypes[selectedPackageType].name}</div>`;
     }
     
-    if (selectedPackageDetails.length > 0) {
-        const detailNames = selectedPackageDetails
-            .filter(detailKey => packageDetails[detailKey])
-            .map(detailKey => packageDetails[detailKey].name);
-        
-        if (detailNames.length > 0) {
-            summaryHTML += `<div><strong>蓋の設定:</strong> ${detailNames.join(", ")}</div>`;
-        }
-    }
-    
+    // アングルがあれば表示
     if (selectedAngle) {
         summaryHTML += `<div><strong>アングル:</strong> ${angles[selectedAngle].name}</div>`;
     }
@@ -510,7 +373,6 @@ function showCopyMessage(message) {
 // リセット
 function reset() {
     selectedPackageType = "";
-    selectedPackageDetails = [];
     selectedAngle = "";
     selectedCustomNote = ""; 
     if (customNoteInput) customNoteInput.value = "";
