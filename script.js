@@ -8,7 +8,7 @@ const packageTypes = {
     flat: {
         name: "平袋",
         imageUrl: "/package-prompt-builder/images/flat.jpeg",
-        basePrompt: "Center seal bag, simple rectangular shape, with sealed top and bottom edges only, smooth sides without creases or seals,"
+        basePrompt: "Center seal bag, simple rectangular shape, with sealed top and bottom edges only, smooth sides without creases or seals"
     },
     individual: {
         name: "個包装袋",
