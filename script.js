@@ -165,6 +165,7 @@ const availableImages = pictImages.map(filename => {
 let selectedPackageType = "";
 let selectedPackageDetails = [];
 let selectedAngle = "";
+let selectedCustomNote = "";
 
 // DOM要素
 let packageTypesContainer;
@@ -179,6 +180,7 @@ let generatedPrompt;
 let selectionSummary;
 let imageDisplayArea;
 let dynamicImageGrid;
+let customNoteInput;
 
 // 初期化関数
 function initializeElements() {
@@ -194,7 +196,26 @@ function initializeElements() {
     selectionSummary = document.getElementById("selection-summary");
     imageDisplayArea = document.getElementById("image-display-area");
     dynamicImageGrid = document.getElementById("dynamic-image-grid");
+
+    // 追加：パッケージ種類エリアの直下に自由記述欄を動的に挿入（なければ）
+    if (packageTypesContainer && !document.getElementById("custom-note-container")) {
+        const container = document.createElement("div");
+        container.id = "custom-note-container";
+        container.className = "mt-3";
+        container.innerHTML = `
+            <label class="text-sm text-gray-700 block mb-1">その他（自由記述）</label>
+            <textarea id="custom-note-input" placeholder="添付のスケッチの形状の箱" class="w-full p-2 border border-gray-200 rounded-md text-sm text-gray-700 resize-none" rows="2"></textarea>
+        `;
+        // packageTypesContainerの次の位置に挿入
+        packageTypesContainer.parentNode.insertBefore(container, packageTypesContainer.nextSibling);
+    }
+
+    customNoteInput = document.getElementById("custom-note-input");
+    if (customNoteInput) {
+        selectedCustomNote = customNoteInput.value.trim();
+    }
 }
+
 
 // パッケージタイプボタンの生成
 function renderPackageTypes() {
@@ -384,6 +405,10 @@ document.addEventListener("DOMContentLoaded", function() {
 // プロンプト生成
 function generatePrompt() {
     const parts = [];
+    // 追加：自由記述があれば先に挿入（指定通りプレフィックスを付与）
+    if (selectedCustomNote && selectedCustomNote.length > 0) {
+        parts.push("white paper box packaging mockup, " + selectedCustomNote);
+    }
 
     // 形状（basePrompt）またはフォールバック
     if (selectedPackageType && packageTypes[selectedPackageType]) {
@@ -420,9 +445,9 @@ function updateUI() {
     renderAngles();
     updateFilteredImages(); // 新しい画像表示関数を呼び出す
     
-    const hasPackageType = selectedPackageType !== "";
-    showPromptBtn.disabled = !hasPackageType;
-    copyPromptBtn.disabled = !hasPackageType;
+    const hasPackageTypeOrNote = selectedPackageType !== "" || (selectedCustomNote && selectedCustomNote.length > 0);
+    showPromptBtn.disabled = !hasPackageTypeOrNote;
+    copyPromptBtn.disabled = !hasPackageTypeOrNote;
     
     // プロンプト表示欄を非表示にする（選択内容が変わった場合）
     promptDisplay.classList.add("hidden");
@@ -497,6 +522,8 @@ function reset() {
     selectedPackageType = "";
     selectedPackageDetails = [];
     selectedAngle = "";
+    selectedCustomNote = ""; 
+    if (customNoteInput) customNoteInput.value = "";
     promptDisplay.classList.add("hidden");
     copyMessage.classList.add("hidden");
     updateUI();
@@ -507,6 +534,15 @@ function setupEventListeners() {
     showPromptBtn.addEventListener("click", showPrompt);
     copyPromptBtn.addEventListener("click", copyToClipboard);
     resetBtn.addEventListener("click", reset);
+
+// 追加：自由記述入力の変更を監視
+    if (customNoteInput) {
+        customNoteInput.addEventListener("input", (e) => {
+            selectedCustomNote = e.target.value.trim();
+            // 選択内容が変わったとみなしてUIを更新（プロンプト欄は非表示に）
+            updateUI();
+        });
+    }
 }
 
 // ページ読み込み完了時の初期化
