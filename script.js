@@ -162,7 +162,7 @@ const availableImages = pictImages.map(filename => {
 });
 
 // アプリケーションの状態
-let selectedPackageType = "";
+let selectedPackageTypes = [];
 let selectedPackageDetails = [];
 let selectedAngle = "";
 let selectedCustomNote = "";
@@ -207,38 +207,48 @@ function initializeElements() {
 
 // パッケージタイプボタンの生成
 function renderPackageTypes() {
-    packageTypesContainer.innerHTML = "";
-    
+    if (!packageTypesContainer) return;
+    let buttonsHTML = "";
+
     Object.keys(packageTypes).forEach(key => {
         const type = packageTypes[key];
-        const button = document.createElement("button");
-        const isSelected = selectedPackageType === key;
-        
-        button.className = `package-btn rounded-lg border-2 transition-all duration-200 ${
-            isSelected ? "border-blue-500 bg-blue-50 text-blue-700" : "border-gray-200 hover:border-blue-300 hover:bg-blue-50"
-        }`;
-        
-        button.innerHTML = `
-            <div class="flex flex-col items-center justify-center py-2">
-                <div class="w-[120px] h-[120px] flex-none border border-gray-300 rounded-lg flex items-center justify-center mb-2 overflow-hidden bg-white">
-                    <img src="${type.imageUrl}" alt="${type.name}アイコン" class="max-w-full max-h-full object-contain rounded-lg" />
+        const isSelected = selectedPackageTypes.includes(key);
+        const btnClass = isSelected
+            ? "border-blue-500 bg-blue-50 text-blue-700"
+            : "border-gray-200 hover:border-blue-300 hover:bg-blue-50";
+
+        buttonsHTML += `
+            <button type="button" class="package-btn p-3 rounded-lg border-2 transition-all duration-200 ${btnClass}" data-key="${key}" aria-pressed="${isSelected}">
+                <div class="flex flex-col items-center justify-center py-2">
+                    <div class="w-[120px] h-[120px] flex-none border border-gray-300 rounded-lg flex items-center justify-center mb-2 overflow-hidden bg-white">
+                        <img src="${type.imageUrl}" alt="${type.name}アイコン" class="max-w-full max-h-full object-contain rounded-lg" />
+                    </div>
+                    <div class="font-medium text-center text-sm">${type.name}</div>
                 </div>
-                <div class="font-medium text-center text-sm">${type.name}</div>
-            </div>
+            </button>
         `;
-        
-        button.onclick = () => {
-            if (selectedPackageType === key) {
-                selectedPackageType = "";
-                selectedPackageDetails = [];
+    });
+
+    // グリッドラッパーにまとめて挿入
+    packageTypesContainer.innerHTML = `<div class="grid grid-cols-2 md:grid-cols-3 gap-3">${buttonsHTML}</div>`;
+
+    // イベントリスナーを一括追加（複数選択トグル）
+    const typeButtons = packageTypesContainer.querySelectorAll(".package-btn");
+    typeButtons.forEach(btn => {
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const key = this.getAttribute("data-key");
+            if (!key) return;
+            
+            if (selectedPackageTypes.includes(key)) {
+                selectedPackageTypes = selectedPackageTypes.filter(k => k !== key);
+                this.setAttribute("aria-pressed", "false");
             } else {
-                selectedPackageType = key;
-                selectedPackageDetails = [];
+                selectedPackageTypes.push(key);
+                this.setAttribute("aria-pressed", "true");
             }
             updateUI();
-        };
-        
-        packageTypesContainer.appendChild(button);
+        });
     });
 }
 
@@ -321,7 +331,7 @@ function updateFilteredImages() {
     dynamicImageGrid.innerHTML = ""; // コンテナを空にする
 
     // フィルター条件を収集
-    const filters = [selectedPackageType, ...selectedPackageDetails, selectedAngle].filter(Boolean); // 空の文字列を除去
+    const filters = [...selectedPackageTypes, ...selectedPackageDetails, selectedAngle].filter(Boolean); // 空の文字列を除去
 
     if (filters.length === 0) {
     imageDisplayArea.classList.remove("hidden");
@@ -407,11 +417,15 @@ function generatePrompt() {
     const parts = [];
 
     // 形状（basePrompt）があれば先に追加
-    if (selectedPackageType && packageTypes[selectedPackageType]) {
-        const base = packageTypes[selectedPackageType].basePrompt || "";
-        if (base) parts.push(base);
+    if (selectedPackageTypes.length > 0) {
+        selectedPackageTypes.forEach(typeKey => {
+            const base = packageTypes[typeKey]?.basePrompt || "";
+            if (base) {
+                const isDup = parts.some(p => p.includes(base) || base.includes(p));
+                if (!isDup) parts.push(base);
+            }
+        });
     }
-
     // 追加：自由記述があれば形状の直後に挿入（プレフィックスなし）
     if (selectedCustomNote && selectedCustomNote.length > 0) {
         parts.push(selectedCustomNote);
@@ -432,7 +446,7 @@ function generatePrompt() {
     }
 
     // 共通付加句（先頭の "Generate a white paper box mockup image" は呼び出し側で付与）
-    parts.push("clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text");
+    parts.push("clean white background, excellent separation from background, professional quality, professional lighting, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text");
 
     // parts が空でも共通句は付くので空チェック不要
     return "Generate a white paper box mockup image " + parts.join(", ");
@@ -445,7 +459,7 @@ function updateUI() {
     renderAngles();
     updateFilteredImages(); // 新しい画像表示関数を呼び出す
     
-    const hasPackageTypeOrNote = selectedPackageType !== "" || (selectedCustomNote && selectedCustomNote.length > 0);
+    const hasPackageTypeOrNote = selectedPackageTypes.length > 0 || (selectedCustomNote && selectedCustomNote.length > 0);
     showPromptBtn.disabled = !hasPackageTypeOrNote;
     copyPromptBtn.disabled = !hasPackageTypeOrNote;
     
@@ -460,7 +474,7 @@ function updateUI() {
 
 // プロンプト表示
 function showPrompt() {
-    const hasPackageTypeOrNote = selectedPackageType !== "" || (selectedCustomNote && selectedCustomNote.length > 0);
+    const hasPackageTypeOrNote = selectedPackageTypes.length > 0 || (selectedCustomNote && selectedCustomNote.length > 0);
     if (!hasPackageTypeOrNote) return;
 
     const prompt = generatePrompt();
@@ -469,8 +483,9 @@ function showPrompt() {
      let summaryHTML = "";
     
     // パッケージタイプがあれば表示
-    if (selectedPackageType) {
-        summaryHTML += `<div><strong>パッケージタイプ:</strong> ${packageTypes[selectedPackageType].name}</div>`;
+    if (selectedPackageTypes.length > 0) {
+         const names = selectedPackageTypes.map(k => packageTypes[k]?.name).filter(Boolean).join(", ");
+         summaryHTML += `<div><strong>パッケージタイプ:</strong> ${names}</div>`;
     }
     
     if (selectedPackageDetails.length > 0) {
@@ -530,7 +545,7 @@ function showCopyMessage(message) {
 
 // リセット
 function reset() {
-    selectedPackageType = "";
+    selectedPackageTypes = [];
     selectedPackageDetails = [];
     selectedAngle = "";
     selectedCustomNote = ""; 
