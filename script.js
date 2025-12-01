@@ -5,16 +5,6 @@ const packageTypes = {
         imageUrl: "/package-prompt-builder/images/cube.jpeg",
         basePrompt: "cubic box, equal length on all sides, seamless edges"
     },
-    round: {
-        name: "円筒形",
-        imageUrl: "/package-prompt-builder/images/round.jpeg",
-        basePrompt: "cylindrical box, smooth round edges, seamless design"
-    },
-    oval: {
-        name: "楕円形",
-        imageUrl: "/package-prompt-builder/images/oval.jpeg",
-        basePrompt: "oval shaped box, true elliptical shape, a perfect ellipse shape"
-    },
     thin: {
         name: "薄い",
         imageUrl: "/package-prompt-builder/images/thin.jpeg",
@@ -29,6 +19,16 @@ const packageTypes = {
         name: "横長",
         imageUrl: "/package-prompt-builder/images/horizontal.jpeg",
         basePrompt: "wide and flat box, landscape orientation, spacious design, seamless edges"
+    },
+     round: {
+        name: "円筒形",
+        imageUrl: "/package-prompt-builder/images/round.jpeg",
+        basePrompt: "cylindrical box, smooth round edges, seamless design"
+    },
+    oval: {
+        name: "楕円形",
+        imageUrl: "/package-prompt-builder/images/oval.jpeg",
+        basePrompt: "oval shaped box, true elliptical shape, a perfect ellipse shape"
     },
 };
 
