@@ -22,7 +22,7 @@ const packageTypes = {
     },
     paper_cup: {
         name: "カップ",
-        imageUrl: "/package-prompt-builder/images/cup.jpeg",
+        imageUrl: "/package-prompt-builder/images/paper_cup.jpeg",
         basePrompt: "paper cup"
     },
 };
