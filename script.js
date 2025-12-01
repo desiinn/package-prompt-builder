@@ -388,6 +388,18 @@ document.addEventListener("DOMContentLoaded", function() {
             if (e.target === overlay) closeImageModal();
         };
     }
+    // --- ヘルプボタン・モーダルのイベント設定 ---
+    const helpBtn = document.getElementById('help-btn');
+    const helpModal = document.getElementById('help-modal-overlay');
+    const helpClose = document.getElementById('help-modal-close');
+
+    if (helpBtn && helpModal && helpClose) {
+        helpBtn.onclick = () => helpModal.classList.remove('hidden');
+        helpClose.onclick = () => helpModal.classList.add('hidden');
+        helpModal.onclick = (e) => {
+            if (e.target === helpModal) helpModal.classList.add('hidden');
+        };
+    }
 });
 
 // プロンプト生成
@@ -533,22 +545,5 @@ function setupEventListeners() {
     }
 }
 
-// ページ読み込み完了時の初期化
-document.addEventListener("DOMContentLoaded", function() {
-    initializeElements();
-    setupEventListeners();
-    updateUI();
 
-    // --- ヘルプボタン・モーダルのイベント設定 ---
-    const helpBtn = document.getElementById('help-btn');
-    const helpModal = document.getElementById('help-modal-overlay');
-    const helpClose = document.getElementById('help-modal-close');
 
-    if (helpBtn && helpModal && helpClose) {
-        helpBtn.onclick = () => helpModal.classList.remove('hidden');
-        helpClose.onclick = () => helpModal.classList.add('hidden');
-        helpModal.onclick = (e) => {
-            if (e.target === helpModal) helpModal.classList.add('hidden');
-        };
-    }
-});
