@@ -227,18 +227,20 @@ function renderAngles() {
 }
 // 関連画像表示（AND条件で全タグ一致のみ表示）
 function updateFilteredImages() {
+    if (!dynamicImageGrid) return;
+    
     dynamicImageGrid.innerHTML = ""; // コンテナを空にする
 
     // フィルター条件を収集
-    const filters = [selectedPackageType, selectedAngle].filter(Boolean); // 空の文字列を除去
+    const filters = [selectedPackageType, selectedAngle].filter(Boolean);
 
     if (filters.length === 0) {
-    imageDisplayArea.classList.remove("hidden");
-    dynamicImageGrid.innerHTML = '<div class="text-gray-500 text-center py-8 col-span-4">該当する画像がありません</div>';
-    return;
+        imageDisplayArea.classList.remove("hidden");
+        dynamicImageGrid.innerHTML = '<div class="text-gray-500 text-center py-8 col-span-4">該当する画像がありません</div>';
+        return;
     }
     
-    // フィルター条件の**すべてに**一致する画像のみ抽出（AND条件）
+    // フィルター条件のすべてに一致する画像のみ抽出（AND条件）
     const matchingImages = availableImages.filter(image => {
         return filters.every(filter => image.tags.includes(filter));
     });
@@ -254,19 +256,13 @@ function updateFilteredImages() {
             imageEl.style.maxWidth = "200px";
             imageEl.style.maxHeight = "200px";
             
-            // クリックでモーダル表示
-            imageEl.onclick = () => openImageModal(image.src);
+            // クリックでモーダル表示（プロンプト文を渡す）
+            imageEl.onclick = () => openImageModal(image.src, image.prompt);
 
-            // プロンプト表示用テキスト
-            const promptTextEl = document.createElement("div");
-            promptTextEl.className = "text-xs text-gray-600 mt-2 p-2 bg-gray-50 rounded border border-gray-200 max-w-[200px] break-words line-clamp-2";
-            promptTextEl.textContent = image.prompt;
-
+            // 画像のみをラップ（プロンプトテキストは追加しない）
             const wrapper = document.createElement("div");
-            wrapper.className = "flex justify-center items-center";
+            wrapper.className = "flex flex-col justify-center items-center";
             wrapper.appendChild(imageEl);
-        
-            wrapper.appendChild(promptTextEl);
 
             dynamicImageGrid.appendChild(wrapper);
         });
@@ -279,25 +275,30 @@ function updateFilteredImages() {
 function openImageModal(src, prompt = "") {
     const overlay = document.getElementById('image-modal-overlay');
     const modalImg = document.getElementById('image-modal-img');
-    const imageModalPrompt = document.getElementById('image-modal-prompt'); // モーダル内の表示要素
-    if (overlay && modalImg) {
-        modalImg.src = src;
-        overlay.classList.remove('hidden');
-        if (imageModalPrompt) {
-            if (prompt) {
-                imageModalPrompt.textContent = prompt;
-                imageModalPrompt.classList.remove("hidden");
-            } else {
-                imageModalPrompt.classList.add("hidden");
-            }
+    const imageModalPrompt = document.getElementById('image-modal-prompt');
+    
+    if (!overlay || !modalImg) return;
+    
+    modalImg.src = src;
+    overlay.classList.remove('hidden');
+    
+    // プロンプト表示エリアを制御
+    if (imageModalPrompt) {
+        if (prompt && prompt.trim().length > 0) {
+            // テキスト内容を更新
+            const promptContent = imageModalPrompt.querySelector('div') || imageModalPrompt;
+            promptContent.textContent = prompt;
+            imageModalPrompt.classList.remove("hidden");
+        } else {
+            imageModalPrompt.classList.add("hidden");
         }
     }
 }
+
 function closeImageModal() {
     const overlay = document.getElementById('image-modal-overlay');
     if (overlay) overlay.classList.add('hidden');
 }
-
 // ページ読み込み完了時の初期化
 document.addEventListener("DOMContentLoaded", function() {
     initializeElements();
