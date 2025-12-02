@@ -48,57 +48,57 @@ const angles = {
 
 // images/pict フォルダ内の画像ファイル名を手動で列挙
 const pictImages = [
-    "can-diagonal.jpeg",
-    "can-front-10.jpeg",
-    "can-front-2.jpeg",
-    "can-front-3.jpeg",
-    "can-front-4.jpeg",
-    "can-front-5.jpeg",
-    "can-front-6.jpeg",
-    "can-front-7.jpeg",
-    "can-front-8.jpeg",
-    "can-front-9.jpeg",
-    "can-front.jpeg",
-    "can-multi_views-2.jpeg",
-    "can-multi_views.jpeg",
-    "paper_cup-10.jpeg",
-    "paper_cup-11.jpeg",
-    "paper_cup-12.jpeg",
-    "paper_cup-2.jpeg",
-    "paper_cup-3.jpeg",
-    "paper_cup-4.jpeg",
-    "paper_cup-5.jpeg",
-    "paper_cup-6.jpeg",
-    "paper_cup-7.jpeg",
-    "paper_cup-8.jpeg",
-    "paper_cup-9.jpeg",
-    "paper_cup-multi_views.jpeg",
-    "paper_cup.jpeg",
-    "pouch-flat-diagonal.jpeg",
-    "pouch-flat-front-2.jpeg",
-    "pouch-flat-front-3.jpeg",
-    "pouch-flat-front-4.jpeg",
-    "pouch-flat-front-5.jpeg",
-    "pouch-flat-front.jpeg",
-    "pouch-gusset-white-diagonal-4.jpeg",
-    "pouch-individual-diagonal-2.jpeg",
-    "pouch-individual-diagonal-3.jpeg",
-    "pouch-individual-diagonal-4.jpeg",
-    "pouch-individual-diagonal.jpeg",
-    "pouch-individual-front.jpeg",
-    "pouch-stand_pouch-diagonal-2.jpeg",
-    "pouch-stand_pouch-diagonal-3.jpeg",
-    "pouch-stand_pouch-diagonal.jpeg",
-    "pouch-stand_pouch-front-2.jpeg",
-    "pouch-stand_pouch-front-3.jpeg",
-    "pouch-stand_pouch-front-4.jpeg",
-    "pouch-stand_pouch-front-5.jpeg",
-    "pouch-stand_pouch-front.jpeg",
-    "pouch-stand_pouch-multi_views-2.jpeg",
-    "pouch-stand_pouch-multi_views-3.jpeg",
-    "pouch-stand_pouch-multi_views-4.jpeg",
-    "pouch-stand_pouch-multi_views.jpeg",
-    // 追加したい画像ファイル名をここに追記
+    { filename: "can-diagonal.jpeg", prompt: "" },
+    { filename: "can-front-10.jpeg", prompt: "" },
+    { filename: "can-front-2.jpeg", prompt: "" },
+    { filename: "can-front-3.jpeg", prompt: "" },
+    { filename: "can-front-4.jpeg", prompt: "" },
+    { filename: "can-front-5.jpeg", prompt: "" },
+    { filename: "can-front-6.jpeg", prompt: "" },
+    { filename: "can-front-7.jpeg", prompt: "" },
+    { filename: "can-front-8.jpeg", prompt: "" },
+    { filename: "can-front-9.jpeg", prompt: "" },
+    { filename: "can-front.jpeg", prompt: "" },
+    { filename: "can-multi_views-2.jpeg", prompt: "" },
+    { filename: "can-multi_views.jpeg", prompt: "" },
+    { filename: "paper_cup-10.jpeg", prompt: "" },
+    { filename: "paper_cup-11.jpeg", prompt: "" },
+    { filename: "paper_cup-12.jpeg", prompt: "" },
+    { filename: "paper_cup-2.jpeg", prompt: "" },
+    { filename: "paper_cup-3.jpeg", prompt: "" },
+    { filename: "paper_cup-4.jpeg", prompt: "" },
+    { filename: "paper_cup-5.jpeg", prompt: "" },
+    { filename: "paper_cup-6.jpeg", prompt: "" },
+    { filename: "paper_cup-7.jpeg", prompt: "" },
+    { filename: "paper_cup-8.jpeg", prompt: "" },
+    { filename: "paper_cup-9.jpeg", prompt: "" },
+    { filename: "paper_cup-multi_views.jpeg", prompt: "" },
+    { filename: "paper_cup.jpeg", prompt: "" },
+    { filename: "pouch-flat-diagonal.jpeg", prompt: "" },
+    { filename: "pouch-flat-front-2.jpeg", prompt: "" },
+    { filename: "pouch-flat-front-3.jpeg", prompt: "" },
+    { filename: "pouch-flat-front-4.jpeg", prompt: "Generate a white packaging mockup image of a Center seal bag, simple rectangular shape, with sealed top and bottom edges only, smooth sides without creases or seals, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-flat-front-5.jpeg", prompt: "" },
+    { filename: "pouch-flat-front.jpeg", prompt: "" },
+    { filename: "pouch-individual-diagonal-2.jpeg", prompt: "" },
+    { filename: "pouch-individual-diagonal-3.jpeg", prompt: "" },
+    { filename: "pouch-individual-diagonal-4.jpeg", prompt: "" },
+    { filename: "pouch-individual-diagonal.jpeg", prompt: "" },
+    { filename: "pouch-individual-front.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-diagonal-2.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-diagonal-3.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-diagonal-4.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-diagonal.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-front-2.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-front-3.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-front-4.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-front-5.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-front.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-multi_views-2.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-multi_views-3.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-multi_views-4.jpeg", prompt: "" },
+    { filename: "pouch-stand_pouch-multi_views.jpeg", prompt: "" }
+    // 追加したい画像ファイルと対応するプロンプト文をここに追記
 ];
 
 // 関連画像データ
@@ -108,6 +108,7 @@ const availableImages = pictImages.map(filename => {
     return {
         src: "images/pict/" + filename,
         tags: tags
+        prompt: item.prompt // プロンプト文を保持
     };
 });
 
@@ -257,9 +258,16 @@ function updateFilteredImages() {
             // クリックでモーダル表示
             imageEl.onclick = () => openImageModal(image.src);
 
+            // プロンプト表示用テキスト
+            const promptTextEl = document.createElement("div");
+            promptTextEl.className = "text-xs text-gray-600 mt-2 p-2 bg-gray-50 rounded border border-gray-200 max-w-[200px] break-words line-clamp-2";
+            promptTextEl.textContent = image.prompt;
+
             const wrapper = document.createElement("div");
             wrapper.className = "flex justify-center items-center";
             wrapper.appendChild(imageEl);
+        
+            wrapper.appendChild(promptTextEl);
 
             dynamicImageGrid.appendChild(wrapper);
         });
@@ -275,6 +283,15 @@ function openImageModal(src) {
     if (overlay && modalImg) {
         modalImg.src = src;
         overlay.classList.remove('hidden');
+        // プロンプト表示エリアがあれば表示
+        if (promptDisplay) {
+            if (prompt) {
+                promptDisplay.textContent = prompt;
+                promptDisplay.classList.remove("hidden");
+            } else {
+                promptDisplay.classList.add("hidden");
+            }
+        }
     }
 }
 function closeImageModal() {
