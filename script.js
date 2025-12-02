@@ -87,19 +87,19 @@ const pictImages = [
     { filename: "pouch-individual-diagonal-4.jpeg", prompt: "Generate a white packaging mockup image of a Center seal bag, simple rectangular shape, with sealed top and bottom edges only, smooth sides without creases or seals, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
     { filename: "pouch-individual-diagonal.jpeg", prompt: "" },
     { filename: "pouch-individual-front.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-diagonal-2.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-diagonal-3.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-diagonal-4.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-diagonal.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-front-2.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-front-3.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-front-4.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-front-5.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-front.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-multi_views-2.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-multi_views-3.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-multi_views-4.jpeg", prompt: "" },
-    { filename: "pouch-stand_pouch-multi_views.jpeg", prompt: "" }
+    { filename: "pouch-stand_pouch-diagonal-2.jpeg", prompt: "Generate a white packaging mockup image of a stand-up pouch, self-standing, 3/4 angle view, slight perspective, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-diagonal-3.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, kraft paper texture, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-diagonal-4.jpeg", prompt: "Generate a white packaging mockup image of a stand-up pouch, self-standing, 3/4 angle view, slight perspective, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-diagonal.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, 透明プラスチック, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-front-2.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, クラフト紙のテクスチャ、front view, centered composition, No angled view, no side view, no three-quarters view, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-front-3.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, 透明プラスチック、front view, centered composition, No angled view, no side view, no three-quarters view, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-front-4.jpeg", prompt: "Generate a white packaging mockup image of a stand-up pouch, self-standing, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-front-5.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, アルミのテクスチャ、front view, centered composition, No angled view, no side view, no three-quarters view, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-front.jpeg", prompt: "Generate a white packaging mockup image of a stand-up pouch, self-standing, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-multi_views-2.jpeg", prompt: "Generate a white packaging mockup image of a stand-up pouch, self-standing, shown from top, front, and side angles, on a single page, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-multi_views-3.jpeg", prompt: "Generate a white packaging mockup image of a stand-up pouch, self-standing, shown from top, front, and side angles, on a single page, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-multi_views-4.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, kraft paper texture, shown from top, front, and side angles, on a single page, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "pouch-stand_pouch-multi_views.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, kraft paper texture, shown from top, front, and side angles, on a single page, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" }
     // 追加したい画像ファイルと対応するプロンプト文をここに追記
 ];
 
