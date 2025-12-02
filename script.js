@@ -102,13 +102,12 @@ const pictImages = [
 ];
 
 // 関連画像データ
-const availableImages = pictImages.map(filename => {
-    // 拡張子を除いた部分をタグとして分割
-    const tags = filename.replace(/\.[^/.]+$/, "").split("-")
+const availableImages = pictImages.map(item => {
+    const tags = item.filename.replace(/\.[^/.]+$/, "").split("-");
     return {
-        src: "images/pict/" + filename,
-        tags: tags
-        prompt: item.prompt // プロンプト文を保持
+        src: "images/pict/" + item.filename,
+        tags: tags,
+        prompt: item.prompt || ""
     };
 });
 
@@ -277,19 +276,19 @@ function updateFilteredImages() {
 }
 
 // --- 画像プレビューモーダル制御 ---
-function openImageModal(src) {
+function openImageModal(src, prompt = "") {
     const overlay = document.getElementById('image-modal-overlay');
     const modalImg = document.getElementById('image-modal-img');
+    const imageModalPrompt = document.getElementById('image-modal-prompt'); // モーダル内の表示要素
     if (overlay && modalImg) {
         modalImg.src = src;
         overlay.classList.remove('hidden');
-        // プロンプト表示エリアがあれば表示
-        if (promptDisplay) {
+        if (imageModalPrompt) {
             if (prompt) {
-                promptDisplay.textContent = prompt;
-                promptDisplay.classList.remove("hidden");
+                imageModalPrompt.textContent = prompt;
+                imageModalPrompt.classList.remove("hidden");
             } else {
-                promptDisplay.classList.add("hidden");
+                imageModalPrompt.classList.add("hidden");
             }
         }
     }
