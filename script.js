@@ -25,6 +25,11 @@ const packageTypes = {
         imageUrl: "/package-prompt-builder/images/paper_cup.jpeg",
         basePrompt: "paper cup"
     },
+    other: {
+        name: "その他",
+        imageUrl: "/package-prompt-builder/images/other.jpeg",
+        basePrompt: ""
+    },
 };
 
 
@@ -106,7 +111,16 @@ const pictImages = [
     { filename: "pouch-stand_pouch-multi_views-2.jpeg", prompt: "Generate a white packaging mockup image of a stand-up pouch, self-standing, shown from top, front, and side angles, on a single page, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
     { filename: "pouch-stand_pouch-multi_views-3.jpeg", prompt: "Generate a white packaging mockup image of a stand-up pouch, self-standing, shown from top, front, and side angles, on a single page, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
     { filename: "pouch-stand_pouch-multi_views-4.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, kraft paper texture, shown from top, front, and side angles, on a single page, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
-    { filename: "pouch-stand_pouch-multi_views.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, kraft paper texture, shown from top, front, and side angles, on a single page, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" }
+    { filename: "pouch-stand_pouch-multi_views.jpeg", prompt: "Generate a packaging mockup image of a stand-up pouch, self-standing, kraft paper texture, shown from top, front, and side angles, on a single page, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "other-diagonal", prompt: "Generate a white paper box packaging mockup, seamless edges, the packaging consists of a separate lid and base, open lid, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "other-diagonal_2", prompt: "generate a white paper box packaging mockup, Luxury rigid box, open lid, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "other-diagonal_3", prompt: "Generate a white packaging mockup image of a 持ち手の付いた紙箱, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "other-diagonal_4", prompt: "Generate a white packaging mockup image of a milk carton, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "other-diagonal_5", prompt: "Generate a white packaging mockup image of a 牛乳パック, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "other-diagonal_6", prompt: "generate a white paper box packaging mockup, seamless edges, Tuck-In Flap lid, Tuck-End Box, Tuck-End carton, open lid, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "other-front", prompt: "generate a white paper box packaging mockup, cylindrical box, smooth round edges, seamless design, tall and slim box, vertical orientation, premium look, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+    { filename: "other-front_2", prompt: "Generate a white paper box packaging mockup, cylindrical box, smooth round edges, seamless design, open lid, clean white background, professional quality, professional lighting, high quality, minimalist design, product photography style, 4K resolution, commercial grade mockup, no text" },
+
     // 追加したい画像ファイルと対応するプロンプト文をここに追記
 ];
 
